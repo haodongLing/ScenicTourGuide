@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/navigation_main"
+        android:icon="@mipmap/ic_main_normal"
+        android:title="@string/navigation_main"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/navigation_location"
+        android:icon="@mipmap/ic_location_normal"
+        android:title="@string/navigation_location"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/navigation_hotel"
+        android:icon="@mipmap/ic_hotel_normal"
+        android:title="@string/navigation_hotel"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/navigation_track"
+        android:icon="@mipmap/ic_track_normal"
+        android:title="@string/navigation_track"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/navigation_mine"
+        android:icon="@mipmap/ic_mine_normal"
+        android:title="@string/navigation_mine"
+        app:showAsAction="ifRoom" />
+
+</menu>

@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Scenic Tour Guide</string>
+    <string name="navigation_main">首页</string>
+    <string name="navigation_location">景点</string>
+    <string name="navigation_track">足迹</string>
+    <string name="navigation_hotel">酒店</string>
+    <string name="navigation_mine">我的</string>
+</resources>
