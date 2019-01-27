@@ -3,6 +3,8 @@ package com.haodong.scenictourguide.common.utils.dimen;
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
 
+import com.haodong.scenictourguide.common.app.TourGuide;
+
 /**
  * describe :
  * date on 2019/1/26
@@ -11,13 +13,13 @@ import android.util.DisplayMetrics;
  */
 public class DimenUtil {
     public static int getScreenWidth() {
-        final Resources resources = Latte.getApplicationContext().getResources();
+        final Resources resources = TourGuide.getApplicationContext().getResources();
         final DisplayMetrics dm = resources.getDisplayMetrics();
         return dm.widthPixels;
     }
 
     public static int getScreenHeight() {
-        final Resources resources = Latte.getApplicationContext().getResources();
+        final Resources resources = TourGuide.getApplicationContext().getResources();
         final DisplayMetrics dm = resources.getDisplayMetrics();
         return dm.heightPixels;
     }

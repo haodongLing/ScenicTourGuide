@@ -11,8 +11,7 @@
         android:id="@+id/lay_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/len_52"
-        />
+        android:layout_marginBottom="@dimen/len_52" />
 
     <net.qiujuer.genius.ui.widget.FloatActionButton
         android:id="@+id/btn_action"
@@ -21,26 +20,19 @@
         android:layout_marginBottom="@dimen/len_68"
         android:layout_marginEnd="@dimen/len_16"
         android:padding="@dimen/len_20"
-        android:src="@mipmap/ic_camera"
+        android:src="@drawable/ic_camera"
         android:tint="@color/white"
         android:translationY="@dimen/len_76"
         app:gBackgroundColor="@color/colorAccent"
         app:layout_anchor="@id/lay_container"
         app:layout_anchorGravity="bottom|end" />
 
-    <android.support.design.widget.BottomNavigationView
+    <com.aurelhubert.ahbottomnavigation.AHBottomNavigation
         android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="@dimen/len_52"
         android:layout_gravity="bottom"
         android:background="@color/white"
-        android:elevation="@dimen/len_4"
-        android:outlineProvider="bounds"
-        android:translationZ="@dimen/len_8"
-        app:itemIconTint="@color/colorTxtSelected"
-        app:itemTextColor="@color/colorTxtSelected"
-        app:menu="@menu/navigation_items"
-        tools:targetApi="lollipop"
-        tools:visibility="invisible" />
+        app:menu="@menu/navigation_items" />
 
 </android.support.design.widget.CoordinatorLayout>

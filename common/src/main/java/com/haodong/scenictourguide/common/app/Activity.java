@@ -9,6 +9,8 @@ import com.haodong.scenictourguide.common.widget.convention.PlaceHolderView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+import static butterknife.ButterKnife.bind;
+
 /**
  * describe :
  * author linghailong
@@ -17,7 +19,7 @@ import butterknife.Unbinder;
  */
 public abstract class Activity extends AppCompatActivity{
     protected PlaceHolderView mPlaceHolderView;
-    Unbinder unbinder;
+    private Unbinder unbinder;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +30,7 @@ public abstract class Activity extends AppCompatActivity{
             // 得到界面Id并设置到Activity界面中
             int layId = getContentLayoutId();
             setContentView(layId);
+            unbinder=ButterKnife.bind(this);
             initBefore();
             initWidget();
             initData();
@@ -69,7 +72,7 @@ public abstract class Activity extends AppCompatActivity{
      * 初始化控件
      */
     protected void initWidget() {
-       unbinder=ButterKnife.bind(this);
+
     }
 
     /**
@@ -93,6 +96,7 @@ public abstract class Activity extends AppCompatActivity{
     protected void onDestroy() {
         super.onDestroy();
         unbinder.unbind();
+
     }
 
     /**

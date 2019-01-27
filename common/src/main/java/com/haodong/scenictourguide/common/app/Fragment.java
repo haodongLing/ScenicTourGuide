@@ -2,7 +2,6 @@ package com.haodong.scenictourguide.common.app;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -36,6 +35,7 @@ public abstract class Fragment extends android.support.v4.app.Fragment {
         initArgs(getArguments());
 
     }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -105,6 +105,11 @@ public abstract class Fragment extends android.support.v4.app.Fragment {
         return false;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mRootUnBinder.unbind();
+    }
 
     /**
      * 设置占位布局
