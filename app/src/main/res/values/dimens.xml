@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="tab_icon_size">23dp</dimen>
+    <dimen name="tab_margin_in_top">3dp</dimen>
+    <dimen name="tab_height">53dp</dimen>
+</resources>

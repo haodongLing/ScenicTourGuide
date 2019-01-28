@@ -1,38 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+  >
 
     <FrameLayout
         android:id="@+id/lay_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/len_52" />
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_main"
+        app:layout_constraintTop_toTopOf="parent"
+      />
 
     <net.qiujuer.genius.ui.widget.FloatActionButton
         android:id="@+id/btn_action"
         android:layout_width="@dimen/len_52"
         android:layout_height="@dimen/len_52"
-        android:layout_marginBottom="@dimen/len_68"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginEnd="@dimen/len_16"
+        android:layout_marginBottom="@dimen/len_68"
         android:padding="@dimen/len_20"
         android:src="@drawable/ic_camera"
         android:tint="@color/white"
         android:translationY="@dimen/len_76"
         app:gBackgroundColor="@color/colorAccent"
-        app:layout_anchor="@id/lay_container"
-        app:layout_anchorGravity="bottom|end" />
-
-    <com.aurelhubert.ahbottomnavigation.AHBottomNavigation
-        android:id="@+id/navigation"
+        app:layout_anchor="@id/lay_container" />
+    <LinearLayout
+        android:id="@+id/bottom_navigation_main"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/len_52"
-        android:layout_gravity="bottom"
+        android:layout_height="@dimen/tab_height"
+        android:layout_alignParentBottom="true"
         android:background="@color/white"
-        app:menu="@menu/navigation_items" />
+        android:orientation="horizontal">
+        <LinearLayout
+            android:id="@+id/tab_bottom_main"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            tools:ignore="Suspicious0dp">
 
-</android.support.design.widget.CoordinatorLayout>
+            <ImageView
+                android:id="@+id/iv_tab_main"
+                android:layout_width="@dimen/tab_icon_size"
+                android:layout_height="@dimen/tab_icon_size"
+                android:src="@drawable/ic_main_color" />
+
+            <TextView
+                android:id="@+id/tv_main_main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tab_margin_in_top"
+                android:text="@string/navigation_main"
+                android:textColor="@color/colorTxtSelected"
+                android:textSize="@dimen/font_12" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tab_bottom_location"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            tools:ignore="Suspicious0dp">
+
+            <ImageView
+                android:id="@+id/iv_tab_location"
+                android:layout_width="@dimen/tab_icon_size"
+                android:layout_height="@dimen/tab_icon_size"
+                android:src="@drawable/ic_location_normal" />
+
+            <TextView
+                android:id="@+id/tv_main_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tab_margin_in_top"
+                android:text="@string/navigation_location"
+                android:textColor="@color/colorTxtNormal"
+                android:textSize="@dimen/font_12" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tab_bottom_hotel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            tools:ignore="Suspicious0dp">
+
+            <ImageView
+                android:id="@+id/iv_tab_hotel"
+                android:layout_width="@dimen/tab_icon_size"
+                android:layout_height="@dimen/tab_icon_size"
+                android:src="@drawable/ic_hotel_normal" />
+
+            <TextView
+                android:id="@+id/tv_main_hotel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tab_margin_in_top"
+                android:text="@string/navigation_hotel"
+                android:textColor="@color/colorTxtNormal"
+                android:textSize="@dimen/font_12" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tab_bottom_track"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            tools:ignore="Suspicious0dp">
+
+            <ImageView
+                android:id="@+id/iv_tab_track"
+                android:layout_width="@dimen/tab_icon_size"
+                android:layout_height="@dimen/tab_icon_size"
+                android:src="@drawable/ic_track_normal" />
+
+            <TextView
+                android:id="@+id/tv_main_track"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tab_margin_in_top"
+                android:text="@string/navigation_track"
+                android:textColor="@color/colorTxtNormal"
+                android:textSize="@dimen/font_12" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tab_bottom_mine"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            tools:ignore="Suspicious0dp">
+
+            <ImageView
+                android:id="@+id/iv_tab_mine"
+                android:layout_width="@dimen/tab_icon_size"
+                android:layout_height="@dimen/tab_icon_size"
+                android:src="@drawable/ic_mine_normal" />
+
+            <TextView
+                android:id="@+id/tv_main_mine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tab_margin_in_top"
+                android:text="@string/navigation_mine"
+                android:textColor="@color/colorTxtNormal"
+                android:textSize="@dimen/font_12" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
