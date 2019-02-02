@@ -5,4 +5,10 @@
     <string name="navigation_track">足迹</string>
     <string name="navigation_hotel">酒店</string>
     <string name="navigation_mine">我的</string>
+
+    <string name="label_login_welcome">登录</string>
+    <string name="label_phone">手机</string>
+    <string name="label_pwd">密码</string>
+    <string name="label_go_register">没有账户？去注册</string>
+    <string name="label_login">登陆</string>
 </resources>

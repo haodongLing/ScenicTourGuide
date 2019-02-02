@@ -6,11 +6,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.haodong.scenictourguide.common.app.Activity;
+import com.haodong.scenictourguide.common.app.activities.MyActivity;
 
 import butterknife.BindView;
 
-public class MainActivity extends Activity implements View.OnClickListener {
+public class MainActivity extends MyActivity implements View.OnClickListener {
     @BindView(R.id.tab_bottom_main)
     LinearLayout tabMain;
     @BindView(R.id.tab_bottom_location)

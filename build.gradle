@@ -38,4 +38,5 @@ ext {
 
     butterknifeVersion = '9.0.0'
     geniusVersion = '2.1.0'
+    fragmentation='1.3.6'
 }

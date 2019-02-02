@@ -3,4 +3,9 @@
     <dimen name="tab_icon_size">23dp</dimen>
     <dimen name="tab_margin_in_top">3dp</dimen>
     <dimen name="tab_height">53dp</dimen>
+
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="custom_section_height">36dp</dimen>
 </resources>

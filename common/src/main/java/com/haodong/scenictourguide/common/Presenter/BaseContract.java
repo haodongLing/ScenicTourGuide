@@ -12,7 +12,7 @@ public interface BaseContract {
     // 基本的界面职责
     interface View<T extends Presenter> {
         // 公共的：显示一个字符串错误
-        void showError(@StringRes int str);
+        void showError(String error);
 
         // 公共的：显示进度条
         void showLoading();

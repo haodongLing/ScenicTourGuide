@@ -2,6 +2,8 @@ package com.haodong.scenictourguide.common.app;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.annotation.StringRes;
+import android.widget.Toast;
 
 import java.util.logging.Handler;
 
@@ -34,5 +36,4 @@ public final class TourGuide {
     public static Handler getHandler() {
         return getConfiguration(ConfigKeys.HANDLER);
     }
-
 }

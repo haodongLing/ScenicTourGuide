@@ -66,5 +66,7 @@ dependencies {
     /*辅助工具包*/
     api "net.qiujuer.genius:ui:$rootProject.ext.geniusVersion"
     api "net.qiujuer.genius:res:$rootProject.ext.geniusVersion"
+    // appcompat-v7包是必须的
+    api "me.yokeyword:fragmentation:$rootProject.ext.fragmentation"
 
 }
