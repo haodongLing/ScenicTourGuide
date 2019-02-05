@@ -20,6 +20,8 @@ import butterknife.Unbinder;
 import me.yokeyword.fragmentation.ExtraTransaction;
 import me.yokeyword.fragmentation.ISupportFragment;
 import me.yokeyword.fragmentation.SupportFragmentDelegate;
+import me.yokeyword.fragmentation.SupportHelper;
+import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
 /**
@@ -282,4 +284,46 @@ public abstract class MyFragment extends Fragment implements ISupportFragment {
     public void start(final ISupportFragment toFragment, @LaunchMode int launchMode) {
         DELEGATE.start(toFragment, launchMode);
     }
+    /**
+     * 加载根Fragment, 即Activity内的第一个Fragment 或 Fragment内的第一个子Fragment
+     *
+     * @param containerId 容器id
+     * @param toFragment  目标Fragment
+     */
+    public void loadRootFragment(int containerId, ISupportFragment toFragment) {
+        DELEGATE.loadRootFragment(containerId, toFragment);
+    }
+    /**
+     * 加载多个同级根Fragment
+     */
+    public void loadMultipleRootFragment(int containerId, int showPosition, ISupportFragment... toFragments) {
+        DELEGATE.loadMultipleRootFragment(containerId, showPosition, toFragments);
+    }
+    /**
+     * show一个Fragment,hide一个Fragment ;
+     */
+    public void showHideFragment(ISupportFragment showFragment, ISupportFragment hideFragment) {
+        DELEGATE.showHideFragment(showFragment, hideFragment);
+    }
+    /**
+     * Start the target Fragment and pop itself
+     */
+    public void startWithPop(ISupportFragment toFragment) {
+        DELEGATE.startWithPop(toFragment);
+    }
+    /**
+     * 获取栈内的fragment对象
+     */
+    public <T extends ISupportFragment> T findFragment(Class<T> fragmentClass) {
+        return SupportHelper.findFragment(getFragmentManager(), fragmentClass);
+    }
+
+    /**
+     * 获取栈内的fragment对象
+     */
+    public <T extends ISupportFragment> T findChildFragment(Class<T> fragmentClass) {
+        return SupportHelper.findFragment(getChildFragmentManager(), fragmentClass);
+    }
+
+
 }

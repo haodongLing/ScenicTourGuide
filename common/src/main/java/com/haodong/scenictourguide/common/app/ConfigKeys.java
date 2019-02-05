@@ -14,5 +14,8 @@ public enum ConfigKeys {
     INTERCEPTOR,
     ACTIVITY,
     HANDLER,
-    WEB_HOST
+    WEB_HOST,
+    CITY,
+    PROVINCE,
+    DISTRICT
 }

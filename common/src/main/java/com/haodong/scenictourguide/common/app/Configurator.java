@@ -90,6 +90,11 @@ public final class Configurator {
         }
         return (T) GUIDE_CONFIGS.get(key);
     }
+    final void setConfiguration(ConfigKeys key,Object value) {
+        checkConfiguration();
+        GUIDE_CONFIGS.put(key,value);
+    }
+
 
 
 }

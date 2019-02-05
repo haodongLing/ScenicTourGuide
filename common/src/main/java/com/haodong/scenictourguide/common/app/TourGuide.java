@@ -3,6 +3,7 @@ package com.haodong.scenictourguide.common.app;
 import android.app.Application;
 import android.content.Context;
 import android.support.annotation.StringRes;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.logging.Handler;
@@ -27,6 +28,9 @@ public final class TourGuide {
 
     public static <T> T getConfiguration(Object key) {
         return getConfigurator().getConfiguration(key);
+    }
+    public static void setConfiguration(ConfigKeys key,Object value) {
+            getConfigurator().setConfiguration(key,value);
     }
 
     public static Application getApplicationContext() {

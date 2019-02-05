@@ -24,7 +24,7 @@ public abstract class PresenterFragment<Presenter extends BaseContract.Presenter
 
     @Override
     public void showError(String error) {
-        Toast.makeText(getContext(),error,Toast.LENGTH_SHORT);
+        Toast.makeText(getContext(),error,Toast.LENGTH_SHORT).show();
     }
 
     @Override

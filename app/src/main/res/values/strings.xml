@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Scenic Tour Guide</string>
+    <string name="app_name">Tour Guide</string>
     <string name="navigation_main">首页</string>
     <string name="navigation_location">景点</string>
     <string name="navigation_track">足迹</string>
@@ -11,4 +11,5 @@
     <string name="label_pwd">密码</string>
     <string name="label_go_register">没有账户？去注册</string>
     <string name="label_login">登陆</string>
+    <string name="label_permissions">权限授予</string>
 </resources>
