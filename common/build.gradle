@@ -7,7 +7,7 @@ android {
 
 
     defaultConfig {
-        minSdkVersion 22
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -36,8 +36,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-
-    api 'com.github.bumptech.glide:glide:3.7.0'
     api 'com.alibaba:fastjson:1.1.70.android'
     api 'com.android.support:cardview-v7:28.0.0'
 //    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.39'
@@ -68,5 +66,16 @@ dependencies {
     api "net.qiujuer.genius:res:$rootProject.ext.geniusVersion"
     // appcompat-v7包是必须的
     api "me.yokeyword:fragmentation:$rootProject.ext.fragmentation"
+    //RecyclerView依赖
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
+    //RecyclerView分割线
+    api 'com.choices.divider:RecyclerView_Divider:1.0.0'
+    //图片处理
+    api 'com.github.bumptech.glide:glide:4.8.0'
+    api 'com.github.bumptech.glide:okhttp3-integration:4.7.1@aar'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+    //Banner依赖
+    api 'com.bigkoo:convenientbanner:2.0.5'
+    api 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
 
 }

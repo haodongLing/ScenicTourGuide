@@ -16,6 +16,7 @@ import com.haodong.scenictourguide.common.app.ConfigKeys;
 import com.haodong.scenictourguide.common.app.TourGuide;
 import com.haodong.scenictourguide.common.app.activities.MyActivity;
 import com.haodong.scenictourguide.common.app.fragments.MyFragment;
+import com.haodong.scenictourguide.common.utils.AppUtils;
 import com.haodong.scenictourguide.hotel.HotelFragment;
 import com.haodong.scenictourguide.location.LocationFragment;
 import com.haodong.scenictourguide.main.MainFragment;
@@ -77,6 +78,11 @@ public class MainActivity extends MyActivity implements View.OnClickListener {
     protected int getContentLayoutId() {
         return R.layout.activity_main;
 
+    }
+
+    @Override
+    protected void initWindows() {
+        AppUtils.setInmmersiveStatusBar(MainActivity.this);
     }
 
     @Override

@@ -21,22 +21,13 @@ import butterknife.OnClick;
  * email 105354999@qq.com
  */
 public class LocationFragment extends MyFragment {
-    @BindView(R.id.tv_location_label)
-    TextView mTvLocation;
-    @OnClick(R.id.tv_location_label)
-    void onLocationClick() {
-        startActivityForResult(new Intent(getContext(), CitypickerActivity.class), MyRequestCode
-                .REQUEST_CODE_LOCATION);
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == MyRequestCode.REQUEST_CODE_LOCATION && resultCode == MyResultCode
                 .RESULT_CODE_LOCATION) {
-            mTvLocation.setText(TourGuide.getConfiguration(ConfigKeys.CITY));
             String location = data.getStringExtra("location");
-            Log.e("tag", "onActivityResult: -------->locationFragment"+location);
+            Log.e("tag", "onActivityResult: -------->locationFragment" + location);
         }
     }
 

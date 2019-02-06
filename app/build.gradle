@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.haodong.scenictourguide"
-        minSdkVersion 22
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -43,5 +43,5 @@ dependencies {
     implementation 'com.github.ittianyu:BottomNavigationViewEx:2.0.2'
     /*citypicker*/
     implementation 'com.zaaach:citypicker:2.0.3'    //必选
-    implementation 'com.android.support:recyclerview-v7:28.0.0'    //必选
+
 }

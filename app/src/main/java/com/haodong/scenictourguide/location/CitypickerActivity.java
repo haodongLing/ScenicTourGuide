@@ -2,9 +2,6 @@ package com.haodong.scenictourguide.location;
 
 import android.content.Intent;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.widget.Button;
 
 import com.haodong.scenictourguide.MyResultCode;
 import com.haodong.scenictourguide.R;
@@ -17,23 +14,7 @@ import com.zaaach.citypicker.model.City;
 import com.zaaach.citypicker.model.LocateState;
 import com.zaaach.citypicker.model.LocatedCity;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
 public class CitypickerActivity extends MyActivity {
-
-    @BindView(R.id.btn_city_picker_jump)
-    Button mBtnJump;
-
-    @OnClick(R.id.btn_city_picker_jump)
-    void onJumpClick() {
-        Intent intent = getIntent();
-        String location = "锦州";
-        intent.putExtra("location", location);
-        setResult(MyResultCode.RESULT_CODE_LOCATION, intent);
-        finish();
-    }
-
     @Override
     protected int getContentLayoutId() {
         return R.layout.activity_citypicker;

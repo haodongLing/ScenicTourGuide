@@ -1,13 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/tv_location_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/navigation_location"
-        android:textSize="@dimen/font_20"
-        />
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue_200"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/srl_location"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_location"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tab_location"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/len_76"
+        android:background="@color/yellow_900"
+        app:layout_behavior="com.haodong.scenictourguide.location.TranslucentBehavior">
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/len_24">
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/et_search_view"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="6"
+                android:background="@drawable/bg_tab_search"
+                android:gravity="center_vertical"
+                android:hint="搜索"
+                android:paddingLeft="@dimen/len_12" />
+
+            <ImageView
+                android:id="@+id/iv_tab_location_search"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/len_24"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:src="@drawable/ic_search_color" />
+        </android.support.v7.widget.LinearLayoutCompat>
+    </android.support.v7.widget.Toolbar>
+
+</android.support.design.widget.CoordinatorLayout>

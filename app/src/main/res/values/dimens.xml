@@ -8,4 +8,6 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="custom_section_height">36dp</dimen>
+    <!--CoordinatorLayout behavior-->
+    <dimen name="header_height">80dp</dimen>
 </resources>

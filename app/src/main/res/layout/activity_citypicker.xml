@@ -4,12 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".location.CitypickerActivity">
-
-    <Button
-        android:id="@+id/btn_city_picker_jump"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="click to jump" />
-
+    tools:context=".location.CitypickerActivity"
+    android:background="@color/trans">
 </LinearLayout>

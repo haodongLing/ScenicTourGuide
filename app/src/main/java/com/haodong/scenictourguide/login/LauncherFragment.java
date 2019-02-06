@@ -22,7 +22,7 @@ public class LauncherFragment extends MyFragment {
 
     @BindView(R.id.btn_submit)
     Button mBtnEnter;
-    @OnClick
+    @OnClick(R.id.btn_submit)
     void onSubmitClick(){
         getFragmentManager().beginTransaction().add(R.id.fl_launcher_contain,new LoginFragment()).hide(this)
                 .commit();
