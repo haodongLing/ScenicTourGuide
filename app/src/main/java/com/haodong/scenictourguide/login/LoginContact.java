@@ -1,6 +1,6 @@
 package com.haodong.scenictourguide.login;
 
-import com.haodong.scenictourguide.common.Presenter.BaseContract;
+import com.haodong.scenictourguide.common.presenter.BaseContract;
 
 /**
  * describe :

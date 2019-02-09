@@ -23,6 +23,7 @@ public class GuideApp extends Application {
         super.onCreate();
         TourGuide.init(this)
                 .withLoaderDelayed(1500)
+                .withApiHost("http://apis.haoservice.com/lifeservice/travel/scenery")
                 .configure();
         /***
          * 初始化定位sdk，

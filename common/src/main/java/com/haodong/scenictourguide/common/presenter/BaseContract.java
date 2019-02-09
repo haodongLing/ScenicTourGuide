@@ -1,6 +1,4 @@
-package com.haodong.scenictourguide.common.Presenter;
-
-import android.support.annotation.StringRes;
+package com.haodong.scenictourguide.common.presenter;
 
 /**
  * describe : mvp基本的接口架构

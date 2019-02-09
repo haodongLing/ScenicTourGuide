@@ -2,7 +2,7 @@ package com.haodong.scenictourguide.login;
 
 import android.text.TextUtils;
 
-import com.haodong.scenictourguide.common.Presenter.BasePresenter;
+import com.haodong.scenictourguide.common.presenter.BasePresenter;
 
 /**
  * describe :

@@ -1,18 +1,17 @@
 package com.haodong.scenictourguide.location;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.TextView;
 
 import com.haodong.scenictourguide.MyRequestCode;
 import com.haodong.scenictourguide.MyResultCode;
 import com.haodong.scenictourguide.R;
-import com.haodong.scenictourguide.common.app.ConfigKeys;
-import com.haodong.scenictourguide.common.app.TourGuide;
-import com.haodong.scenictourguide.common.app.fragments.MyFragment;
+import com.haodong.scenictourguide.common.app.fragments.PresenterFragment;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * describe :
@@ -20,7 +19,9 @@ import butterknife.OnClick;
  * author linghailong
  * email 105354999@qq.com
  */
-public class LocationFragment extends MyFragment {
+public class LocationFragment extends PresenterFragment<LocationPresenter> {
+    @BindView(R.id.rv_location)
+    RecyclerView mRecyclerView;
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -29,6 +30,19 @@ public class LocationFragment extends MyFragment {
             String location = data.getStringExtra("location");
             Log.e("tag", "onActivityResult: -------->locationFragment" + location);
         }
+    }
+
+
+    @Override
+    public LocationPresenter initPresenter() {
+        return new LocationPresenter(this);
+    }
+
+    @Override
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        super.onLazyInitView(savedInstanceState);
+        mRecyclerView.setAdapter();
+
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.haodong.scenictourguide.common.Presenter;
+package com.haodong.scenictourguide.common.presenter;
 
 /**
  * describe : basePresenter

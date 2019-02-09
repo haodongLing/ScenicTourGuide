@@ -3,7 +3,7 @@ package com.haodong.scenictourguide.common.app.fragments;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.haodong.scenictourguide.common.Presenter.BaseContract;
+import com.haodong.scenictourguide.common.presenter.BaseContract;
 
 /**
  * describe :
