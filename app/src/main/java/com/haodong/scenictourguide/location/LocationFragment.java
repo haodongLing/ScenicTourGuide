@@ -41,7 +41,7 @@ public class LocationFragment extends PresenterFragment<LocationPresenter> {
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
-        mRecyclerView.setAdapter();
+//        mRecyclerView.setAdapter();
 
     }
 
