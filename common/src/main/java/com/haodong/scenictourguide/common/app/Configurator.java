@@ -55,6 +55,15 @@ public final class Configurator {
         GUIDE_CONFIGS.put(ConfigKeys.LOADER_DELAYED, delayed);
         return this;
     }
+    /**
+     * 为APPKEY
+     * @param delayed
+     * @return
+     */
+    public final Configurator withAppKey(String appKey) {
+        GUIDE_CONFIGS.put(ConfigKeys.APPKEY, appKey);
+        return this;
+    }
 
     /**
      * 获取配置信息

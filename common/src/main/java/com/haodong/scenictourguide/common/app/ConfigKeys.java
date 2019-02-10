@@ -17,5 +17,6 @@ public enum ConfigKeys {
     WEB_HOST,
     CITY,
     PROVINCE,
-    DISTRICT
+    DISTRICT,
+    APPKEY
 }

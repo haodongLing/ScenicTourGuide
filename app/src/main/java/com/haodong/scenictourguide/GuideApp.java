@@ -24,6 +24,7 @@ public class GuideApp extends Application {
         TourGuide.init(this)
                 .withLoaderDelayed(1500)
                 .withApiHost("http://apis.haoservice.com/lifeservice/travel/scenery")
+                .withAppKey("7040bc83a04d4de382b61d63a3edda19")
                 .configure();
         /***
          * 初始化定位sdk，
