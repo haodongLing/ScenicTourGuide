@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue_200"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
@@ -23,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/len_76"
         android:background="@color/yellow_900"
+        android:alpha="0"
         app:layout_behavior="com.haodong.scenictourguide.location.TranslucentBehavior">
 
         <android.support.v7.widget.LinearLayoutCompat
@@ -47,7 +48,7 @@
                 android:layout_height="@dimen/len_24"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:src="@drawable/ic_search_color" />
+                android:src="@drawable/ic_search_normal" />
         </android.support.v7.widget.LinearLayoutCompat>
     </android.support.v7.widget.Toolbar>
 

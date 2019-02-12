@@ -52,7 +52,7 @@
                 android:padding="@dimen/len_2"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                tools:text="AAAAA" />
+                tools:text="未评级" />
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/qi"
@@ -71,7 +71,7 @@
                 android:layout_marginRight="@dimen/len_8"
                 android:layout_toLeftOf="@+id/qi"
                 android:text="起"
-                android:textColor="@color/red_50" />
+                android:textColor="@color/red_700" />
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/line1"

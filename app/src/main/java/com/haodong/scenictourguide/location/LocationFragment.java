@@ -92,13 +92,12 @@ public class LocationFragment extends PresenterFragment<LocationContact.Presente
     }
     public void showData(List<ScenicBean.ResultBean> list){
         if (mAdapter==null){
-            mAdapter=new ScenicListAdapter(list);
             mRecyclerView.setAdapter(mAdapter);
         }else if (isPullToRefresh){
-            mAdapter.setNewData(list);
+
            mAdapter.notifyDataSetChanged();
         }else {
-            mAdapter.addData(list);
+//            mAdapter.addData(list);
             mAdapter.notifyItemChanged(mAdapter.getItemCount()+3);
         }
     }

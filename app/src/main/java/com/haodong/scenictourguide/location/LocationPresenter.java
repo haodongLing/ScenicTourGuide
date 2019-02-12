@@ -32,9 +32,7 @@ public class LocationPresenter extends BasePresenter<LocationFragment> implement
         params.put("page", 1);
         params.put("key", TourGuide.getConfiguration(ConfigKeys.APPKEY));
         RxRestClient.builder()
-                .url(TourGuide.getConfiguration(ConfigKeys.API_HOST))
-                .params(params)
-                .loader(getView().getContext())
+                .url("http://apis.haoservice.com/lifeservice/travel/scenery?pid=2&cid=45&page=1&key=7040bc83a04d4de382b61d63a3edda19")
                 .build()
                 .get()
                 .subscribeOn(Schedulers.io())

@@ -26,7 +26,8 @@ public class RestCreator {
     /*单例模式的静态颞部类*/
     private static final class RetrofitHolder {
         /*baseAPI*/
-        private static final String BASE_URL = TourGuide.getConfiguration(ConfigKeys.API_HOST);
+//        private static final String BASE_URL = TourGuide.getConfiguration(ConfigKeys.API_HOST);
+        private static final String BASE_URL ="http://www.baidu.com";
         /*建造者模式*/
         /*添加转换器*/
         private static final Retrofit RETROFIT_CLIENT = new Retrofit.Builder().baseUrl(BASE_URL)
