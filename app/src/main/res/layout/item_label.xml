@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="@dimen/len_100">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/len_60"
+    android:gravity="center_vertical"
+    android:paddingLeft="@dimen/len_16">
+
     <TextView
+        android:id="@+id/tv_item_label_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="label"/>
+        android:text="北京必体验"
+        android:textColor="@color/black_alpha_192"
+        android:textSize="@dimen/font_28" />
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

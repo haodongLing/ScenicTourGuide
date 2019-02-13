@@ -8,8 +8,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.haodong.scenictourguide.MyRequestCode;
 import com.haodong.scenictourguide.MyResultCode;
 import com.haodong.scenictourguide.R;
@@ -23,8 +25,10 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -35,7 +39,7 @@ import butterknife.BindView;
  * author linghailong
  * email 105354999@qq.com
  */
-public class LocationFragment extends PresenterFragment<LocationContact.Presenter>{
+public class LocationFragment extends PresenterFragment<LocationContact.Presenter> {
     ScenicListAdapter mAdapter;
     private boolean isPullToRefresh;
     @BindView(R.id.tab_location)
@@ -52,32 +56,40 @@ public class LocationFragment extends PresenterFragment<LocationContact.Presente
                 .RESULT_CODE_LOCATION) {
             String location = data.getStringExtra("location");
             Log.e("tag", "onActivityResult: -------->locationFragment" + location);
+            mPresenter.loadFirstPage();
         }
     }
-
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
         mPresenter.loadFirstPage();
     }
-
     @Override
     protected void initWidget(View root) {
         super.initWidget(root);
         mSrlayout.setRefreshHeader(new TaurusHeader(getContext()));
         //设置 Footer 为 球脉冲 样式
-        mSrlayout.setRefreshFooter(new BallPulseFooter(getContext()).setSpinnerStyle(SpinnerStyle.Scale));
+        mSrlayout.setRefreshFooter(new BallPulseFooter(getContext()).setSpinnerStyle(SpinnerStyle
+                .Scale));
         mSrlayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
-              mTabLayout.setVisibility(View.GONE);
+                mTabLayout.setVisibility(View.GONE);
+                refreshLayout.finishRefresh(2000);
             }
         });
-        LinearLayoutManager manager=new LinearLayoutManager(getContext(),LinearLayoutManager
-                .VERTICAL,false);
+        mSrlayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(RefreshLayout refreshLayout) {
+                refreshLayout.finishLoadMore(2000);
+            }
+        });
+        LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager
+                .VERTICAL, false);
         mRecyclerView.setLayoutManager(manager);
     }
-    public void showTab(){
+
+    public void showTab() {
         mTabLayout.setVisibility(View.VISIBLE);
     }
 
@@ -90,15 +102,25 @@ public class LocationFragment extends PresenterFragment<LocationContact.Presente
     public LocationContact.Presenter initPresenter() {
         return new LocationPresenter(this);
     }
-    public void showData(List<ScenicBean.ResultBean> list){
-        if (mAdapter==null){
-            mRecyclerView.setAdapter(mAdapter);
-        }else if (isPullToRefresh){
 
-           mAdapter.notifyDataSetChanged();
-        }else {
-//            mAdapter.addData(list);
-            mAdapter.notifyItemChanged(mAdapter.getItemCount()+3);
+    public void showData(ArrayList<ScenicBean.ResultBean> list) {
+        if (mAdapter == null) {
+            mAdapter = new ScenicListAdapter(list, true);
+            mRecyclerView.setAdapter(mAdapter);
+        } else if (isPullToRefresh) {
+            mAdapter.setNewData(list);
+            mAdapter.notifyDataSetChanged();
+        } else {
+            mAdapter.addData(list);
+            mAdapter.notifyItemChanged(mAdapter.getItemCount() + 3);
         }
+        mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                Log.e("tag", "onItemChildClick: " );
+                startActivityForResult(new Intent(getContext(), CitypickerActivity.class),
+                        MyRequestCode.REQUEST_CODE_LOCATION);
+            }
+        });
     }
 }

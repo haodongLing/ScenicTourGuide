@@ -23,7 +23,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/len_76"
         android:background="@color/yellow_900"
-        android:alpha="0"
         app:layout_behavior="com.haodong.scenictourguide.location.TranslucentBehavior">
 
         <android.support.v7.widget.LinearLayoutCompat

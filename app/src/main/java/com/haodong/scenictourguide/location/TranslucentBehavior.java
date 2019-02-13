@@ -56,6 +56,7 @@ public final class TranslucentBehavior extends CoordinatorLayout.Behavior<Toolba
             , int dyUnconsumed
             , int type) {
         final int startOffset = 0;
+        toolbar.getBackground().setAlpha(0);
         final Context context = TourGuide.getApplicationContext();
         final int endOffset = context.getResources().getDimensionPixelOffset(R.dimen.header_height) + MORE;
         mOffset += dyConsumed;

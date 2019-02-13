@@ -9,5 +9,5 @@
 
     <dimen name="custom_section_height">36dp</dimen>
     <!--CoordinatorLayout behavior-->
-    <dimen name="header_height">80dp</dimen>
+    <dimen name="header_height">128dp</dimen>
 </resources>

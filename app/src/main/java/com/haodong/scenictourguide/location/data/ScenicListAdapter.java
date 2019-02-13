@@ -1,11 +1,6 @@
 package com.haodong.scenictourguide.location.data;
 
-import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -15,90 +10,103 @@ import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.haodong.scenictourguide.R;
+import com.haodong.scenictourguide.common.app.ConfigKeys;
+import com.haodong.scenictourguide.common.app.TourGuide;
 import com.haodong.scenictourguide.common.ui.recycler.ItemType;
-import com.haodong.scenictourguide.common.ui.recycler.MultipleViewHolder;
 import com.haodong.scenictourguide.commonvh.AdViewHolder;
 import com.haodong.scenictourguide.commonvh.LabelViewHolder;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class ScenicListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private static final int ITEM_TYPE_HEAD = 0;
-    private static final int ITEM_TYPE_AD = 1;
-    private static final int ITEM_TYPE_LABEL = 2;
-    private static final int ITEM_TYPE_CONTENT = 3;
+public class ScenicListAdapter extends BaseQuickAdapter<ScenicBean.ResultBean, BaseViewHolder> {
+    private ArrayList<ScenicBean.ResultBean> dataArr = null;
+    private boolean mIsFirstIn = true;
 
-    private Context mContext;
-    private ArrayList<ScenicBean.ResultBean> dataArray;
+    //设置图片加载策略
+    private static final RequestOptions RECYCLER_OPTIONS =
+            new RequestOptions()
+                    .centerCrop()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .dontAnimate();
 
-    public ScenicListAdapter(Context context, ArrayList<ScenicBean.ResultBean> data) {
-        this.mContext = context;
-        this.dataArray = data;
+    public ScenicListAdapter(int layoutResId, @Nullable ArrayList<ScenicBean.ResultBean> data,
+                             boolean isFirstIn) {
+        super(layoutResId, data);
+        this.dataArr = data;
+        this.mIsFirstIn = isFirstIn;
+    }
+
+    public ScenicListAdapter(@Nullable ArrayList<ScenicBean.ResultBean> data, boolean isFirstIn) {
+        super(data);
+        this.dataArr = data;
+        this.mIsFirstIn = isFirstIn;
+        init();
+    }
+
+    private void init() {
+    }
+
+    public ScenicListAdapter(int layoutResId) {
+        super(layoutResId);
     }
 
     @Override
-    public int getItemViewType(int position) {
+    protected int getDefItemViewType(int position) {
         switch (position) {
             case 0:
-                return ITEM_TYPE_HEAD;
+                return ItemType.HEAD;
             case 1:
-                return ITEM_TYPE_AD;
+                return ItemType.AD;
             case 2:
-                return ITEM_TYPE_LABEL;
+                return ItemType.LABEL;
             default:
-                return ITEM_TYPE_CONTENT;
+                return ItemType.CONTENT;
         }
+
     }
 
-    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        View view;
+    protected BaseViewHolder onCreateDefViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
-            case ITEM_TYPE_HEAD:
-                view = LayoutInflater.from(mContext).inflate(R.layout.item_scenic_header,
-                        viewGroup, false);
-                HeadViewHolder headViewHolder = new HeadViewHolder(view);
-                return headViewHolder;
-            case ITEM_TYPE_AD:
-                view = LayoutInflater.from(mContext).inflate(R.layout.item_ad,
-                        viewGroup, false);
-                AdViewHolder adViewHolder = new AdViewHolder(view);
-                return adViewHolder;
-            case ITEM_TYPE_LABEL:
-                view = LayoutInflater.from(mContext).inflate(R.layout.item_label,
-                        viewGroup, false);
-                LabelViewHolder labelViewHolder = new LabelViewHolder(view);
-                return labelViewHolder;
+            case ItemType.HEAD:
+                return new HeadViewHolder(getItemView(R.layout.item_scenic_header, parent));
+            case ItemType.AD:
+                return new AdViewHolder(getItemView(R.layout.item_ad, parent));
+            case ItemType.LABEL:
+                return new LabelViewHolder(getItemView(R.layout.item_label, parent));
             default:
-                view = LayoutInflater.from(mContext).inflate(R.layout.item_list_scenic,
-                        viewGroup, false);
-                ContentViewHolder contentViewHolder = new ContentViewHolder(view);
-                return contentViewHolder;
+                return new ContentViewHolder(getItemView(R.layout.item_list_scenic, parent));
         }
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        getItemViewType(i);
-        switch (i){
-            case ITEM_TYPE_HEAD :
-                break;
-            case ITEM_TYPE_AD:
-                break;
-            case ITEM_TYPE_LABEL:
-                break;
-                default:
-//                    int tempPosition
-                    break;
-        }
-
     }
 
 
     @Override
-    public int getItemCount() {
-        return dataArray.size()+3;
+    protected void convert(BaseViewHolder helper, ScenicBean.ResultBean item) {
+        if (helper instanceof HeadViewHolder){
+            helper.setText(R.id.tv_item_header_location,TourGuide.getConfiguration(ConfigKeys
+                    .CITY));
+            helper.addOnClickListener(R.id.layout_item_header_location);
+        }
+        if (helper instanceof ContentViewHolder) {
+            helper.setText(R.id.item_scenit_list_title, item.getTitle());
+            helper.setText(R.id.item_scenit_list_grade, item.getGrade());
+            helper.setText(R.id.item_scenit_list_location, item.getAddress());
+            helper.setText(R.id.item_scenit_list_price, item.getPrice_min());
+            Glide.with(mContext)
+                    .load(item.getImgurl())
+                    .apply(RECYCLER_OPTIONS)
+                    .into((ImageView) helper.getView(R.id.item_scenit_list_img));
+        }
+
     }
+
+    @Override
+    public void onBindViewHolder(BaseViewHolder holder, int position) {
+
+        if (position > 2) {
+            convert(holder, mData.get(position - 2));
+        }
+    }
+
+
 }

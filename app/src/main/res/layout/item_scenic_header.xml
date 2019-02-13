@@ -1,12 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="120dp"
-    android:orientation="vertical">
-    <TextView
-        android:id="@+id/item_scenic_head_tv"
+    android:layout_height="@dimen/len_128"
+    android:orientation="horizontal"
+    android:background="@drawable/bg_header"
+    android:paddingTop="@dimen/len_76"
+    >
+    <LinearLayout
+        android:id="@+id/layout_item_header_location"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="head"/>
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/len_16"
+        android:gravity="center_vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我在"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="@dimen/font_18"/>
+        <TextView
+            android:id="@+id/tv_item_header_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="北京"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="@dimen/font_18"/>
+        <ImageView
+            android:layout_width="@dimen/len_16"
+            android:layout_height="@dimen/len_16"
+            android:src="@drawable/ic_pull_circle"
+            android:layout_marginLeft="@dimen/len_8"
+            />
+    </LinearLayout>
+
 
 </LinearLayout>
