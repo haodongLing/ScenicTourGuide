@@ -3,7 +3,10 @@ package com.haodong.scenictourguide.location;
 import com.alibaba.fastjson.JSON;
 import com.haodong.scenictourguide.common.app.ConfigKeys;
 import com.haodong.scenictourguide.common.app.TourGuide;
+import com.haodong.scenictourguide.common.net.CityInfo;
+import com.haodong.scenictourguide.common.net.QueryCityInfoUtils;
 import com.haodong.scenictourguide.common.net.RxRestClient;
+import com.haodong.scenictourguide.common.net.UrlUtils;
 import com.haodong.scenictourguide.common.presenter.BasePresenter;
 import com.haodong.scenictourguide.location.data.LocationContact;
 import com.haodong.scenictourguide.location.data.ScenicBean;
@@ -27,12 +30,9 @@ public class LocationPresenter extends BasePresenter<LocationFragment> implement
     @Override
     public void loadFirstPage() {
         WeakHashMap<String, Object> params = new WeakHashMap<>();
-        params.put("pid", 2);
-        params.put("cid", 45);
-        params.put("page", 1);
-        params.put("key", TourGuide.getConfiguration(ConfigKeys.APPKEY));
+       CityInfo.ResultBean cityBean=QueryCityInfoUtils.getInstance().queryCityBean("北京");
         RxRestClient.builder()
-                .url("http://apis.haoservice.com/lifeservice/travel/scenery?pid=2&cid=45&page=1&key=7040bc83a04d4de382b61d63a3edda19")
+                .url(UrlUtils.getUrlByPageAndLocation(cityBean,1))
                 .build()
                 .get()
                 .subscribeOn(Schedulers.io())

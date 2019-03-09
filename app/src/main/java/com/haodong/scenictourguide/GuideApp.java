@@ -6,6 +6,7 @@ import android.os.Vibrator;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.haodong.scenictourguide.common.app.TourGuide;
+import com.haodong.scenictourguide.common.net.QueryCityInfoUtils;
 import com.haodong.scenictourguide.service.LocationService;
 
 /**
@@ -32,5 +33,7 @@ public class GuideApp extends Application {
         locationService = new LocationService(getApplicationContext());
         mVibrator =(Vibrator)getApplicationContext().getSystemService(Service.VIBRATOR_SERVICE);
         SDKInitializer.initialize(getApplicationContext());
+        /*缓存location的数据*/
+        QueryCityInfoUtils.getInstance().insertCityInfo(getApplicationContext());
     }
 }
