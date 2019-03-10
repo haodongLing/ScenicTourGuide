@@ -22,7 +22,7 @@
         android:id="@+id/tab_location"
         android:layout_width="match_parent"
         android:layout_height="@dimen/len_76"
-        android:background="@color/yellow_900"
+        android:background="@color/white"
         app:layout_behavior="com.haodong.scenictourguide.location.TranslucentBehavior">
 
         <android.support.v7.widget.LinearLayoutCompat

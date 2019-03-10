@@ -1,12 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/navigation_mine"
+
+    <LinearLayout
+        android:id="@+id/mine_layout_header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/len_76"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/len_16"
+        android:paddingRight="@dimen/len_16"
+        android:paddingTop="@dimen/len_24">
+
+        <ImageView
+            android:id="@+id/mine_img_setting"
+            android:layout_width="@dimen/len_24"
+            android:layout_height="@dimen/len_24"
+            android:src="@drawable/ic_fenlei_color" />
+
+        <ImageView
+            android:id="@+id/mine_img_scan"
+            android:layout_width="@dimen/len_24"
+            android:layout_height="@dimen/len_24"
+            android:layout_marginLeft="@dimen/len_10"
+            android:src="@drawable/ic_scan_color" />
+
+        <ImageView
+            android:id="@+id/mine_img_message"
+            android:layout_width="@dimen/len_24"
+            android:layout_height="@dimen/len_24"
+            android:layout_gravity="right"
+            android:src="@drawable/ic_pinlun_color" />
+    </LinearLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/mine_layout_mine_info"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/len_72"
+        android:paddingLeft="16dp"
+        android:paddingRight="@dimen/len_16"
+        app:layout_constraintTop_toBottomOf="@+id/mine_layout_header">
+
+        <ImageView
+            android:id="@+id/mine_img_avator"
+            android:layout_width="@dimen/len_56"
+            android:layout_height="@dimen/len_56"
+            android:src="@drawable/ic_launcher"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/mine_tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/len_12"
+            android:layout_marginTop="@dimen/len_8"
+            android:text="Name"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@id/mine_img_avator"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/mine_tv_czd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="常住地"
+            app:layout_constraintLeft_toRightOf="@id/mine_img_avator"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="@dimen/len_8"
+            android:layout_marginLeft="@dimen/len_12"/>
+        <TextView
+            android:id="@+id/mine_tv_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="北京"
+            app:layout_constraintLeft_toRightOf="@id/mine_tv_czd"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="@dimen/len_8"
+            android:layout_marginLeft="@dimen/len_4"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/mine_tv_gz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="关注"
+            app:layout_constraintLeft_toRightOf="@id/mine_tv_location"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="@dimen/len_8"
+            android:layout_marginLeft="@dimen/len_12"
+            />
+        <TextView
+            android:id="@+id/mine_tv_gz_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4"
+            app:layout_constraintLeft_toRightOf="@id/mine_tv_gz"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="@dimen/len_8"
+            android:layout_marginLeft="@dimen/len_4"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:id="@+id/mine_tv_fs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="粉丝"
+            app:layout_constraintLeft_toRightOf="@id/mine_tv_gz_number"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="@dimen/len_8"
+            android:layout_marginLeft="@dimen/len_12"
+            />
+        <TextView
+            android:id="@+id/mine_tv_fs_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            app:layout_constraintLeft_toRightOf="@id/mine_tv_fs"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="@dimen/len_8"
+            android:layout_marginLeft="@dimen/len_4"
+            android:textStyle="bold"
+            />
+        <ImageView
+            android:layout_width="@dimen/len_24"
+            android:layout_height="@dimen/len_24"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:src="@drawable/ic_direction_right"
+            android:layout_marginTop="@dimen/len_12"/>
+    </android.support.constraint.ConstraintLayout>
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@id/mine_layout_mine_info"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHeight_percent="0.12"
+        app:layout_constraintWidth_percent="0.7"
+        android:background="@drawable/bg_btn_daka"
+        app:layout_constraintVertical_bias="0.25"
+        android:text="打卡"
         android:textSize="@dimen/font_20"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         />
 
 </android.support.constraint.ConstraintLayout>
