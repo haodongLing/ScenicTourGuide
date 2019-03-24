@@ -1,18 +1,15 @@
 package com.haodong.scenictourguide.common.ui.recycler;
 
-import java.util.ArrayList;
-
 /**
  * describe :
  * date on 2019/3/23
  * author linghailong
  * email 105354999@qq.com
  */
-public abstract class DataConverter {
-    protected final ArrayList<MultipleItemEntity> ENTITIES = new ArrayList<>();
+public abstract class DataConverter<T extends Object> {
     private String mJsonData = null;
 
-    public abstract ArrayList<MultipleItemEntity> convert();
+    public abstract T convert();
 
     public DataConverter setJsonData(String json) {
         this.mJsonData = json;
@@ -26,7 +23,4 @@ public abstract class DataConverter {
         return mJsonData;
     }
 
-    public void clearData(){
-        ENTITIES.clear();
-    }
 }

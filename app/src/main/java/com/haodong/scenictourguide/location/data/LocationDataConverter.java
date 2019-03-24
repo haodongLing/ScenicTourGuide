@@ -9,6 +9,7 @@ import com.haodong.scenictourguide.common.ui.recycler.MultipleFields;
 import com.haodong.scenictourguide.common.ui.recycler.MultipleItemEntity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * describe :
@@ -16,27 +17,78 @@ import java.util.ArrayList;
  * author linghailong
  * email 105354999@qq.com
  */
-public class LocationDataConverter extends DataConverter{
+public class LocationDataConverter extends DataConverter<ScenicBean> {
+
     @Override
-    public ArrayList<MultipleItemEntity> convert() {
-        MultipleItemEntity entity=MultipleItemEntity.builder().build();
-        final JSONObject res_body=JSON.parseObject("showapi_res_body");
-        final JSONObject pageBean= res_body.getJSONObject("pagebean");
-        final int allPages=pageBean.getInteger("allPages");
-        final JSONArray contentlist=pageBean.getJSONArray("contentlist");
-        final int size=contentlist.size();
-        for (int i=0;i<size;i++){
-           final JSONObject data=contentlist.getJSONObject(i);
-           final String summery=data.getString("summary");
-            if (!summery.equals("")){
-                entity.setField(MultipleFields.SUMMARY,summery);
+    public ScenicBean convert() {
+        ScenicBean scenicBean=new ScenicBean();
+        final JSONObject res_body = JSON.parseObject("showapi_res_body");
+        final JSONObject pageBean = res_body.getJSONObject("pagebean");
+        final int allPages = pageBean.getInteger("allPages");
+        scenicBean.setAllPages(allPages);
+
+        final JSONArray contentlist = pageBean.getJSONArray("contentlist");
+        final int size = contentlist.size();
+        List<ScenicBean.ContentlistBean>contentlistBeanList=new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            ScenicBean.ContentlistBean contentlistBean=new ScenicBean.ContentlistBean();
+            final JSONObject data = contentlist.getJSONObject(i);
+            /*1 summery*/
+            final String summery = data.getString("summary");
+            if (summery!=null&&!summery.equals("")) {
+                contentlistBean.setSummary(summery);
+            }
+            /*2. 地址*/
+            final String address=data.getString("address");
+            if (address!=null&&!address.equals("")){
+                contentlistBean.setAddress(address);
+            }
+            /*3. name*/
+            final String name=data.getString("name");
+            if (name!=null&&!name.equals("")){
+                contentlistBean.setName(name);
             }
 
+            final JSONObject location=data.getJSONObject("location");
+            final String lat=location.getString("lat");
+            final String lon=location.getString("lon");
+            if (!lat.equals("")&&!lon.equals("")){
+                contentlistBean.setLat(lat);
+                contentlistBean.setLon(lon);
+            }
+            /*4. price*/
+            final String price=data.getString("price");
+            if (price!=null&&!price.equals("")){
+                contentlistBean.setPrice("price");
+            }
+            /*5. content*/
+            final String content=data.getString("content");
+            if (content!=null&&!content.equals("")){
+                contentlistBean.setContent(content);
+            }
+            List<ScenicBean.ContentlistBean.PicListBean>picListBeans=new ArrayList<>();
+            /*6. 图片URL*/
+            final JSONArray picList=data.getJSONArray("picList");
+            int picSize=picList.size();
+            for (int j=0;j<picSize;j++){
+                ScenicBean.ContentlistBean.PicListBean picListBean=new ScenicBean.ContentlistBean.PicListBean();
+                final JSONObject object=picList.getJSONObject(i);
+                final String picUrl=object.getString("picUrl");
+                final String picUrlSmall=object.getString("picUrlSmall");
+                picListBean.setPicUrl(picUrl);
+                picListBean.setPicUrlSmall(picUrlSmall);
+                picListBeans.add(picListBean);
+            }
+            contentlistBean.setPicList(picListBeans);
+            final String opentime=data.getString("opentime");
+            if (opentime!=null&&!opentime.equals("")){
+                contentlistBean.setOpentime(opentime);
+            }
+            contentlistBeanList.add(contentlistBean);
+
         }
-
-
-
-        return ENTITIES;
+        return null;
     }
+
 
 }

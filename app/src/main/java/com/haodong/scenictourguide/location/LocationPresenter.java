@@ -1,14 +1,13 @@
 package com.haodong.scenictourguide.location;
 
+import android.util.Log;
+
 import com.alibaba.fastjson.JSON;
-import com.haodong.scenictourguide.common.app.ConfigKeys;
-import com.haodong.scenictourguide.common.app.TourGuide;
-import com.haodong.scenictourguide.common.net.CityInfo;
-import com.haodong.scenictourguide.common.net.QueryCityInfoUtils;
 import com.haodong.scenictourguide.common.net.RxRestClient;
-import com.haodong.scenictourguide.common.net.UrlUtils;
+import com.haodong.scenictourguide.common.net.api.NormalRequest;
 import com.haodong.scenictourguide.common.presenter.BasePresenter;
 import com.haodong.scenictourguide.location.data.LocationContact;
+import com.haodong.scenictourguide.location.data.LocationDataConverter;
 import com.haodong.scenictourguide.location.data.ScenicBean;
 
 import java.util.ArrayList;
@@ -29,41 +28,46 @@ public class LocationPresenter extends BasePresenter<LocationFragment> implement
 
     @Override
     public void loadFirstPage() {
+        String url = new NormalRequest("http://route.showapi.com/268-1")
+                .addTextPara("keyword", "北京")
+                .addTextPara("page", "1")
+                .getUrlString();
+
         WeakHashMap<String, Object> params = new WeakHashMap<>();
-       CityInfo.ResultBean cityBean=QueryCityInfoUtils.getInstance().queryCityBean("北京");
         RxRestClient.builder()
-                .url(UrlUtils.getUrlByPageAndLocation(cityBean,1))
+                .url(url)
                 .build()
                 .get()
                 .subscribeOn(Schedulers.io())
-                .map(new Function<String, ArrayList>() {
+                .map(new Function<String, ScenicBean>() {
                     @Override
-                    public ArrayList apply(String s) throws Exception {
-                        ScenicBean scenicBean = JSON.parseObject(s, ScenicBean.class);
-                        ArrayList<ScenicBean.ResultBean> list = (ArrayList<ScenicBean
-                                .ResultBean>) scenicBean.getResult();
-                        return list;
+                    public ScenicBean apply(String s) throws Exception {
+                        ScenicBean scenicBean = (ScenicBean) new LocationDataConverter().setJsonData(s).convert();
+                        Log.e("lhl", "apply: "+scenicBean.getAllPages() );
+                        return scenicBean;
                     }
                 }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ArrayList>() {
+                .subscribe(new Observer<ScenicBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(ArrayList arrayList) {
+                    public void onNext(ScenicBean scenicBean) {
                         if (isViewAttached()) {
-                            if (arrayList.size() == 0) {
-                                getView().showError("sss");
-                            } else {
-                                getView().showData(arrayList);
-                                getView().showTab();
-                            }
+                            Log.e("lhl", "onNext: "+scenicBean.getAllPages() );
+//                            if (arrayList.size() == 0) {
+//                                getView().showError("sss");
+//                            } else {
+//                                getView().showData(arrayList);
+//                                getView().showTab();
+//                            }
                         }
 
                     }
+
                     @Override
                     public void onError(Throwable e) {
                         if (isViewAttached()) {
