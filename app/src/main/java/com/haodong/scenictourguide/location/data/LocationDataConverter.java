@@ -1,5 +1,7 @@
 package com.haodong.scenictourguide.location.data;
 
+import android.util.Log;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -22,15 +24,18 @@ public class LocationDataConverter extends DataConverter<ScenicBean> {
     @Override
     public ScenicBean convert() {
         ScenicBean scenicBean=new ScenicBean();
-        final JSONObject res_body = JSON.parseObject("showapi_res_body");
+        final JSONObject s = JSONObject.parseObject(getJsonData());
+        final JSONObject res_body=s.getJSONObject("showapi_res_body");
         final JSONObject pageBean = res_body.getJSONObject("pagebean");
         final int allPages = pageBean.getInteger("allPages");
+        Log.e("lhl", "convert: "+allPages);
         scenicBean.setAllPages(allPages);
 
         final JSONArray contentlist = pageBean.getJSONArray("contentlist");
         final int size = contentlist.size();
         List<ScenicBean.ContentlistBean>contentlistBeanList=new ArrayList<>();
         for (int i = 0; i < size; i++) {
+
             ScenicBean.ContentlistBean contentlistBean=new ScenicBean.ContentlistBean();
             final JSONObject data = contentlist.getJSONObject(i);
             /*1 summery*/
@@ -50,12 +55,15 @@ public class LocationDataConverter extends DataConverter<ScenicBean> {
             }
 
             final JSONObject location=data.getJSONObject("location");
-            final String lat=location.getString("lat");
-            final String lon=location.getString("lon");
-            if (!lat.equals("")&&!lon.equals("")){
-                contentlistBean.setLat(lat);
-                contentlistBean.setLon(lon);
+            if (location!=null){
+                final String lat=location.getString("lat");
+                final String lon=location.getString("lon");
+                if (!lat.equals("")&&!lon.equals("")){
+                    contentlistBean.setLat(lat);
+                    contentlistBean.setLon(lon);
+                }
             }
+
             /*4. price*/
             final String price=data.getString("price");
             if (price!=null&&!price.equals("")){
@@ -69,25 +77,35 @@ public class LocationDataConverter extends DataConverter<ScenicBean> {
             List<ScenicBean.ContentlistBean.PicListBean>picListBeans=new ArrayList<>();
             /*6. 图片URL*/
             final JSONArray picList=data.getJSONArray("picList");
-            int picSize=picList.size();
-            for (int j=0;j<picSize;j++){
-                ScenicBean.ContentlistBean.PicListBean picListBean=new ScenicBean.ContentlistBean.PicListBean();
-                final JSONObject object=picList.getJSONObject(i);
-                final String picUrl=object.getString("picUrl");
-                final String picUrlSmall=object.getString("picUrlSmall");
-                picListBean.setPicUrl(picUrl);
-                picListBean.setPicUrlSmall(picUrlSmall);
-                picListBeans.add(picListBean);
+            if (picList!=null){
+                int picSize=picList.size();
+                for (int j=0;j<picSize;j++){
+                    ScenicBean.ContentlistBean.PicListBean picListBean=new ScenicBean.ContentlistBean.PicListBean();
+                    final JSONObject object=picList.getJSONObject(j);
+                    if (object!=null){
+                        final String picUrl=object.getString("picUrl");
+                        final String picUrlSmall=object.getString("picUrlSmall");
+                        if (picUrl!=null){
+                            picListBean.setPicUrl(picUrl);
+                        }else {
+                            picListBean.setPicUrlSmall(picUrlSmall);
+                        }
+                        picListBeans.add(picListBean);
+                    }
+
+                }
             }
+
             contentlistBean.setPicList(picListBeans);
             final String opentime=data.getString("opentime");
             if (opentime!=null&&!opentime.equals("")){
                 contentlistBean.setOpentime(opentime);
             }
             contentlistBeanList.add(contentlistBean);
-
         }
-        return null;
+        scenicBean.setContentlist(contentlistBeanList);
+        Log.e("lhl", "convert: "+scenicBean );
+        return scenicBean;
     }
 
 

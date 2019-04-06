@@ -9,10 +9,15 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.haodong.scenictourguide.GuideApp;
 import com.haodong.scenictourguide.MyRequestCode;
 import com.haodong.scenictourguide.MyResultCode;
 import com.haodong.scenictourguide.R;
+import com.haodong.scenictourguide.common.app.ConfigKeys;
+import com.haodong.scenictourguide.common.app.TourGuide;
 import com.haodong.scenictourguide.common.app.fragments.PresenterFragment;
 import com.haodong.scenictourguide.common.net.RxRestClient;
 import com.haodong.scenictourguide.common.net.api.NormalRequest;
@@ -20,6 +25,7 @@ import com.haodong.scenictourguide.location.data.LocationContact;
 import com.haodong.scenictourguide.location.data.LocationDataConverter;
 import com.haodong.scenictourguide.location.data.ScenicBean;
 import com.haodong.scenictourguide.location.data.ScenicListAdapter;
+import com.haodong.scenictourguide.location.data.UrlToos;
 import com.scwang.smartrefresh.header.TaurusHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -31,6 +37,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.util.WeakHashMap;
 
 import butterknife.BindView;
+import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -43,7 +50,7 @@ import io.reactivex.schedulers.Schedulers;
  * author linghailong
  * email 105354999@qq.com
  */
-public class LocationFragment extends PresenterFragment<LocationContact.Presenter> {
+public class LocationFragment extends PresenterFragment<LocationContact.Presenter>implements LocationContact.View {
     ScenicListAdapter mAdapter;
     private boolean isPullToRefresh;
     @BindView(R.id.tab_location)
@@ -52,6 +59,8 @@ public class LocationFragment extends PresenterFragment<LocationContact.Presente
     SmartRefreshLayout mSrlayout;
     @BindView(R.id.rv_location)
     RecyclerView mRecyclerView;
+    private int currentPage;
+    private int allPages;
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -59,18 +68,14 @@ public class LocationFragment extends PresenterFragment<LocationContact.Presente
         if (requestCode == MyRequestCode.REQUEST_CODE_LOCATION && resultCode == MyResultCode
                 .RESULT_CODE_LOCATION) {
             String location = data.getStringExtra("location");
-            Log.e("tag", "onActivityResult: -------->locationFragment" + location);
-            mPresenter.loadFirstPage();
+            mPresenter.loadFirstPage(1,TourGuide.getConfiguration(ConfigKeys.CITY));
         }
     }
 
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
-//        mPresenter.loadFirstPage();
-
-
-
+        mPresenter.loadFirstPage(1,"北京");
     }
 
     @Override
@@ -92,6 +97,12 @@ public class LocationFragment extends PresenterFragment<LocationContact.Presente
             @Override
             public void onLoadMore(RefreshLayout refreshLayout) {
                 refreshLayout.finishLoadMore(2000);
+                if (currentPage>allPages){
+                    showNoMoreData();
+                }else {
+                    currentPage=currentPage+1;
+                    mPresenter.loadFirstPage(currentPage,TourGuide.getConfiguration(ConfigKeys.CITY));
+                }
             }
         });
         LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager
@@ -102,50 +113,7 @@ public class LocationFragment extends PresenterFragment<LocationContact.Presente
     @Override
     protected void initData() {
         super.initData();
-        String url = new NormalRequest("http://route.showapi.com/268-1")
-                .addTextPara("keyword", "北京")
-                .addTextPara("page", "1")
-                .getUrlString();
-        String endUrl="http://route.showapi.com/268-1?"+url;
 
-        WeakHashMap<String, Object> params = new WeakHashMap<>();
-        RxRestClient.builder()
-                .url(endUrl)
-                .build()
-                .get()
-                .subscribeOn(Schedulers.io())
-                .map(new Function<String, ScenicBean>() {
-                    @Override
-                    public ScenicBean apply(String s) throws Exception {
-                        ScenicBean scenicBean = (ScenicBean) new LocationDataConverter().setJsonData(s).convert();
-                        Log.e("lhl", "apply: " + scenicBean.getAllPages());
-                        return scenicBean;
-                    }
-                }).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ScenicBean>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(ScenicBean scenicBean) {
-
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
     }
 
     public void showTab() {
@@ -162,24 +130,31 @@ public class LocationFragment extends PresenterFragment<LocationContact.Presente
         return new LocationPresenter(this);
     }
 
-//    public void showData(ArrayList<ScenicBean.ResultBean> list) {
-//        if (mAdapter == null) {
-//            mAdapter = new ScenicListAdapter(list, true);
-//            mRecyclerView.setAdapter(mAdapter);
-//        } else if (isPullToRefresh) {
-//            mAdapter.setNewData(list);
-//            mAdapter.notifyDataSetChanged();
-//        } else {
-//            mAdapter.addData(list);
-//            mAdapter.notifyItemChanged(mAdapter.getItemCount() + 3);
-//        }
-//        mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-//            @Override
-//            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-//                Log.e("tag", "onItemChildClick: " );
-//                startActivityForResult(new Intent(getContext(), CitypickerActivity.class),
-//                        MyRequestCode.REQUEST_CODE_LOCATION);
-//            }
-//        });
-//    }
+    @Override
+    public void showData(ScenicBean scenicBean) {
+        if (mAdapter==null){
+            mAdapter=new ScenicListAdapter(scenicBean.getContentlist(),true);
+            mRecyclerView.setAdapter(mAdapter);
+            allPages=scenicBean.getAllPages();
+        } else if (isPullToRefresh) {
+            mAdapter.setNewData(scenicBean.getContentlist());
+            mAdapter.notifyDataSetChanged();
+        } else {
+            mAdapter.addData(scenicBean.getContentlist());
+            mAdapter.notifyItemChanged(mAdapter.getItemCount() + 3);
+        }
+        mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                Log.e("tag", "onItemChildClick: " );
+                startActivityForResult(new Intent(getContext(), CitypickerActivity.class),
+                        MyRequestCode.REQUEST_CODE_LOCATION);
+            }
+        });
+    }
+
+    @Override
+    public void showNoMoreData() {
+        showError("no more data");
+    }
 }

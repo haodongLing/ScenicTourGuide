@@ -2,16 +2,14 @@ package com.haodong.scenictourguide.location;
 
 import android.util.Log;
 
-import com.alibaba.fastjson.JSON;
+import com.haodong.scenictourguide.common.app.fragments.PresenterFragment;
 import com.haodong.scenictourguide.common.net.RxRestClient;
-import com.haodong.scenictourguide.common.net.api.NormalRequest;
+import com.haodong.scenictourguide.common.presenter.BaseContract;
 import com.haodong.scenictourguide.common.presenter.BasePresenter;
 import com.haodong.scenictourguide.location.data.LocationContact;
 import com.haodong.scenictourguide.location.data.LocationDataConverter;
 import com.haodong.scenictourguide.location.data.ScenicBean;
-
-import java.util.ArrayList;
-import java.util.WeakHashMap;
+import com.haodong.scenictourguide.location.data.UrlToos;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -21,32 +19,35 @@ import io.reactivex.schedulers.Schedulers;
 
 public class LocationPresenter extends BasePresenter<LocationFragment> implements
         LocationContact.Presenter {
+    private String mLocation;
+    private LocationContact.View mView;
 
     LocationPresenter(LocationFragment view) {
         super(view);
+        this.mView=getView();
     }
-
     @Override
-    public void loadFirstPage() {
-        String url = new NormalRequest("http://route.showapi.com/268-1")
-                .addTextPara("keyword", "北京")
-                .addTextPara("page", "1")
-                .getUrlString();
+    public void loadFirstPage(int page, String location) {
+        mLocation=location;
 
-        WeakHashMap<String, Object> params = new WeakHashMap<>();
+        String mPage=String.valueOf(page);
+        String url= UrlToos.getUrl(mLocation,mPage);
         RxRestClient.builder()
                 .url(url)
                 .build()
                 .get()
                 .subscribeOn(Schedulers.io())
-                .map(new Function<String, ScenicBean>() {
+                .map(new Function<String,ScenicBean>() {
                     @Override
                     public ScenicBean apply(String s) throws Exception {
-                        ScenicBean scenicBean = (ScenicBean) new LocationDataConverter().setJsonData(s).convert();
-                        Log.e("lhl", "apply: "+scenicBean.getAllPages() );
-                        return scenicBean;
+                        ScenicBean scenicBean= (ScenicBean) new LocationDataConverter().setJsonData(s).convert();
+                        if (scenicBean!=null){
+                            return scenicBean;
+                        }
+                        return new ScenicBean();
                     }
-                }).subscribeOn(Schedulers.io())
+                })
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ScenicBean>() {
                     @Override
@@ -56,23 +57,18 @@ public class LocationPresenter extends BasePresenter<LocationFragment> implement
 
                     @Override
                     public void onNext(ScenicBean scenicBean) {
-                        if (isViewAttached()) {
-                            Log.e("lhl", "onNext: "+scenicBean.getAllPages() );
-//                            if (arrayList.size() == 0) {
-//                                getView().showError("sss");
-//                            } else {
-//                                getView().showData(arrayList);
-//                                getView().showTab();
-//                            }
-                        }
-
+                       if (mView!=null&&scenicBean.getContentlist()!=null){
+                           mView.showData(scenicBean);
+                       }else {
+                           mView.showError("加载失败");
+                       }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        if (isViewAttached()) {
+                        if (mView!=null){
+                            mView.showError("加载失败");
                         }
-
                     }
 
                     @Override
@@ -80,13 +76,13 @@ public class LocationPresenter extends BasePresenter<LocationFragment> implement
 
                     }
                 });
+
     }
 
     @Override
     public void loadMorePage(int i) {
 
     }
-
     @Override
     public void onRefresh() {
 
