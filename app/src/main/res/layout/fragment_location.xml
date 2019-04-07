@@ -22,7 +22,7 @@
         android:id="@+id/tab_location"
         android:layout_width="match_parent"
         android:layout_height="@dimen/len_76"
-        android:background="@color/white"
+        android:background="#1E90FF"
         app:layout_behavior="com.haodong.scenictourguide.location.TranslucentBehavior">
 
         <android.support.v7.widget.LinearLayoutCompat
@@ -47,7 +47,7 @@
                 android:layout_height="@dimen/len_24"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:src="@drawable/ic_search_normal" />
+                android:src="@drawable/ic_search" />
         </android.support.v7.widget.LinearLayoutCompat>
     </android.support.v7.widget.Toolbar>
 

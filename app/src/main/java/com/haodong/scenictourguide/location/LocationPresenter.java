@@ -1,12 +1,8 @@
 package com.haodong.scenictourguide.location;
 
-import android.util.Log;
-
-import com.haodong.scenictourguide.common.app.fragments.PresenterFragment;
 import com.haodong.scenictourguide.common.net.RxRestClient;
-import com.haodong.scenictourguide.common.presenter.BaseContract;
 import com.haodong.scenictourguide.common.presenter.BasePresenter;
-import com.haodong.scenictourguide.location.data.LocationContact;
+import com.haodong.scenictourguide.location.data.contractor.LocationContact;
 import com.haodong.scenictourguide.location.data.LocationDataConverter;
 import com.haodong.scenictourguide.location.data.ScenicBean;
 import com.haodong.scenictourguide.location.data.UrlToos;
@@ -57,11 +53,15 @@ public class LocationPresenter extends BasePresenter<LocationFragment> implement
 
                     @Override
                     public void onNext(ScenicBean scenicBean) {
-                       if (mView!=null&&scenicBean.getContentlist()!=null){
-                           mView.showData(scenicBean);
-                       }else {
-                           mView.showError("加载失败");
-                       }
+                        if (mView!=null){
+                            if (scenicBean.getContentlist()!=null){
+                                mView.showData(scenicBean);
+                                mView.showToolBar();
+                            }else {
+                                mView.showError("加载失败");
+                                mView.showToolBar();
+                            }
+                        }
                     }
 
                     @Override
@@ -81,7 +81,56 @@ public class LocationPresenter extends BasePresenter<LocationFragment> implement
 
     @Override
     public void loadMorePage(int i) {
+        String mPage=String.valueOf(i);
+        String url= UrlToos.getUrl(mLocation,mPage);
+        RxRestClient.builder()
+                .url(url)
+                .build()
+                .get()
+                .subscribeOn(Schedulers.io())
+                .map(new Function<String,ScenicBean>() {
+                    @Override
+                    public ScenicBean apply(String s) throws Exception {
+                        ScenicBean scenicBean= (ScenicBean) new LocationDataConverter().setJsonData(s).convert();
+                        if (scenicBean!=null){
+                            return scenicBean;
+                        }
+                        return new ScenicBean();
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ScenicBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
 
+                    }
+
+                    @Override
+                    public void onNext(ScenicBean scenicBean) {
+                        if (mView!=null){
+                            if (scenicBean.getContentlist()!=null){
+                                mView.showData(scenicBean);
+                                mView.showToolBar();
+                            }else {
+                                mView.showError("加载失败");
+                                mView.showToolBar();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (mView!=null){
+                            mView.showError("加载失败");
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
     @Override
     public void onRefresh() {

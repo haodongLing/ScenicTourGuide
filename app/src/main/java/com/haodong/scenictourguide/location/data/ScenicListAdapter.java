@@ -1,6 +1,9 @@
 package com.haodong.scenictourguide.location.data;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -15,17 +18,25 @@ import com.haodong.scenictourguide.common.app.TourGuide;
 import com.haodong.scenictourguide.common.ui.recycler.ItemType;
 import com.haodong.scenictourguide.commonvh.AdViewHolder;
 import com.haodong.scenictourguide.commonvh.LabelViewHolder;
+import com.haodong.scenictourguide.location.AttractionsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.http.HEAD;
+
+import static com.blankj.utilcode.util.ActivityUtils.startActivity;
+import static com.haodong.scenictourguide.location.IntentKeys.INTENT_KEY_DATA;
+
 public class ScenicListAdapter extends BaseQuickAdapter<ScenicBean.ContentlistBean, BaseViewHolder> {
     private List<ScenicBean.ContentlistBean> dataArr = null;
     private boolean mIsFirstIn = true;
+    private Context mCOntext;
 
     //设置图片加载策略
     private static final RequestOptions RECYCLER_OPTIONS =
             new RequestOptions()
+                    .error(R.drawable.ic_zanwu)
                     .centerCrop()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .dontAnimate();
@@ -37,7 +48,7 @@ public class ScenicListAdapter extends BaseQuickAdapter<ScenicBean.ContentlistBe
         this.mIsFirstIn = isFirstIn;
     }
 
-    public ScenicListAdapter(@Nullable List<ScenicBean.ContentlistBean> data, boolean isFirstIn) {
+    public ScenicListAdapter( @Nullable List<ScenicBean.ContentlistBean> data, boolean isFirstIn) {
         super(data);
         this.dataArr = data;
         this.mIsFirstIn = isFirstIn;
@@ -56,10 +67,6 @@ public class ScenicListAdapter extends BaseQuickAdapter<ScenicBean.ContentlistBe
         switch (position) {
             case 0:
                 return ItemType.HEAD;
-            case 1:
-                return ItemType.AD;
-            case 2:
-                return ItemType.LABEL;
             default:
                 return ItemType.CONTENT;
         }
@@ -68,33 +75,28 @@ public class ScenicListAdapter extends BaseQuickAdapter<ScenicBean.ContentlistBe
 
     @Override
     protected BaseViewHolder onCreateDefViewHolder(ViewGroup parent, int viewType) {
-        switch (viewType) {
-            case ItemType.HEAD:
-                return new HeadViewHolder(getItemView(R.layout.item_scenic_header, parent));
-            case ItemType.AD:
-                return new AdViewHolder(getItemView(R.layout.item_ad, parent));
-            case ItemType.LABEL:
-                return new LabelViewHolder(getItemView(R.layout.item_label, parent));
-            default:
-                return new ContentViewHolder(getItemView(R.layout.item_list_scenic, parent));
+        View view=null;
+        if (viewType== ItemType.HEAD){
+            view=getItemView(R.layout.item_scenic_header, parent);
+        }else {
+          view=getItemView(R.layout.item_list_scenic, parent);
         }
+        return new HeadViewHolder(view);
     }
 
 
     @Override
     protected void convert(BaseViewHolder helper, ScenicBean.ContentlistBean item) {
-        if (helper instanceof HeadViewHolder) {
+        if (helper.getItemViewType()==ItemType.HEAD) {
             helper.setText(R.id.tv_item_header_location, TourGuide.getConfiguration(ConfigKeys
                     .CITY));
             helper.addOnClickListener(R.id.layout_item_header_location);
-        }
-        if (helper instanceof ContentViewHolder) {
             helper.setText(R.id.item_scenit_list_title, item.getName());
             if (item.getAddress() != null) {
                 helper.setText(R.id.item_scenit_list_location, item.getAddress());
             }
             if (item.getPrice() != null) {
-                helper.setText(R.id.item_scenit_list_price, item.getPrice());
+                helper.setText(R.id.item_scenit_list_price, item.getPrice()+"起");
             }
             String imgUrl = item.getPicList().get(0).getPicUrl();
             if (imgUrl != null) {
@@ -102,6 +104,24 @@ public class ScenicListAdapter extends BaseQuickAdapter<ScenicBean.ContentlistBe
                         .load(imgUrl)
                         .apply(RECYCLER_OPTIONS)
                         .into((ImageView) helper.getView(R.id.item_scenit_list_img));
+            }
+        } else if (helper.getItemViewType()==ItemType.CONTENT) {
+            helper.setText(R.id.item_scenit_list_title, item.getName());
+            if (item.getAddress() != null) {
+                helper.setText(R.id.item_scenit_list_location, item.getAddress());
+            }
+            if (item.getPrice() != null) {
+                helper.setText(R.id.item_scenit_list_price, item.getPrice());
+            }
+            if (item.getPicList() != null && item.getPicList().size() > 0) {
+                String imgUrl = item.getPicList().get(0).getPicUrl();
+                if (imgUrl != null) {
+                    Glide.with(mContext)
+                            .load(imgUrl)
+                            .apply(RECYCLER_OPTIONS)
+                            .into((ImageView) helper.getView(R.id.item_scenit_list_img));
+                }
+
             }
 
 
@@ -111,11 +131,7 @@ public class ScenicListAdapter extends BaseQuickAdapter<ScenicBean.ContentlistBe
 
     @Override
     public void onBindViewHolder(BaseViewHolder holder, int position) {
-
-        if (position > 2) {
-            convert(holder, mData.get(position - 2));
-        }
+        convert(holder, mData.get(position));
     }
-
 
 }

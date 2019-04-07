@@ -15,20 +15,20 @@
         android:layout_marginBottom="@dimen/tab_height"
       />
 
-    <net.qiujuer.genius.ui.widget.FloatActionButton
-        android:id="@+id/btn_action"
-        android:layout_width="@dimen/len_52"
-        android:layout_height="@dimen/len_52"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginEnd="@dimen/len_16"
-        android:layout_marginBottom="@dimen/len_68"
-        android:padding="@dimen/len_20"
-        android:src="@drawable/ic_camera"
-        android:tint="@color/white"
-        android:translationY="@dimen/len_76"
-        app:gBackgroundColor="@color/colorAccent"
-        app:layout_anchor="@id/lay_container" />
+    <!--<net.qiujuer.genius.ui.widget.FloatActionButton-->
+        <!--android:id="@+id/btn_action"-->
+        <!--android:layout_width="@dimen/len_52"-->
+        <!--android:layout_height="@dimen/len_52"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginEnd="@dimen/len_16"-->
+        <!--android:layout_marginBottom="@dimen/len_68"-->
+        <!--android:padding="@dimen/len_20"-->
+        <!--android:src="@drawable/ic_camera"-->
+        <!--android:tint="@color/white"-->
+        <!--android:translationY="@dimen/len_76"-->
+        <!--app:gBackgroundColor="@color/colorAccent"-->
+        <!--app:layout_anchor="@id/lay_container" />-->
     <LinearLayout
         android:id="@+id/bottom_navigation_main"
         android:layout_width="match_parent"

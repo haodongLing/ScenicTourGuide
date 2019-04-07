@@ -1,5 +1,8 @@
 package com.haodong.scenictourguide.location.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +54,7 @@ public class ScenicBean {
                 this.contentlist = contentlist;
             }
 
-            public static class ContentlistBean {
+            public static class ContentlistBean implements Parcelable{
                 private String id;
                 private String proId;
                 private String proName;
@@ -67,6 +70,38 @@ public class ScenicBean {
                 private List<PicListBean> picList;
                 private String lat;
                 private String lon;
+
+                public ContentlistBean() {
+                }
+
+                protected ContentlistBean(Parcel in) {
+                    id = in.readString();
+                    proId = in.readString();
+                    proName = in.readString();
+                    cityId = in.readString();
+                    cityName = in.readString();
+                    summary = in.readString();
+                    address = in.readString();
+                    name = in.readString();
+                    price = in.readString();
+                    content = in.readString();
+                    opentime = in.readString();
+                    attention = in.readString();
+                    lat = in.readString();
+                    lon = in.readString();
+                }
+
+                public static final Creator<ContentlistBean> CREATOR = new Creator<ContentlistBean>() {
+                    @Override
+                    public ContentlistBean createFromParcel(Parcel in) {
+                        return new ContentlistBean(in);
+                    }
+
+                    @Override
+                    public ContentlistBean[] newArray(int size) {
+                        return new ContentlistBean[size];
+                    }
+                };
 
                 public String getLat() {
                     return lat;
@@ -187,6 +222,30 @@ public class ScenicBean {
                 public void setPicList(List<PicListBean> picList) {
                     this.picList = picList;
                 }
+
+                @Override
+                public int describeContents() {
+                    return 0;
+                }
+
+                @Override
+                public void writeToParcel(Parcel dest, int flags) {
+                    dest.writeString(id);
+                    dest.writeString(proId);
+                    dest.writeString(proName);
+                    dest.writeString(cityId);
+                    dest.writeString(cityName);
+                    dest.writeString(summary);
+                    dest.writeString(address);
+                    dest.writeString(name);
+                    dest.writeString(price);
+                    dest.writeString(content);
+                    dest.writeString(opentime);
+                    dest.writeString(attention);
+                    dest.writeString(lat);
+                    dest.writeString(lon);
+                }
+
                 public static class PicListBean {
                     /**
                      * picUrl : http://pic3.40017.cn/scenery/destination/2015/04/18/01/hwHxnP.jpg
