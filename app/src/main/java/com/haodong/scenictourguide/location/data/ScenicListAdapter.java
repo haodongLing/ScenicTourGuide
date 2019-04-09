@@ -28,7 +28,8 @@ import retrofit2.http.HEAD;
 import static com.blankj.utilcode.util.ActivityUtils.startActivity;
 import static com.haodong.scenictourguide.location.IntentKeys.INTENT_KEY_DATA;
 
-public class ScenicListAdapter extends BaseQuickAdapter<ScenicBean.ContentlistBean, BaseViewHolder> {
+public class ScenicListAdapter extends BaseQuickAdapter<ScenicBean.ContentlistBean,
+        BaseViewHolder> implements BaseQuickAdapter.OnItemClickListener {
     private List<ScenicBean.ContentlistBean> dataArr = null;
     private boolean mIsFirstIn = true;
     private Context mCOntext;
@@ -44,12 +45,14 @@ public class ScenicListAdapter extends BaseQuickAdapter<ScenicBean.ContentlistBe
     public ScenicListAdapter(int layoutResId, @Nullable List<ScenicBean.ContentlistBean> data,
                              boolean isFirstIn) {
         super(layoutResId, data);
+        this.setOnItemClickListener(this);
         this.dataArr = data;
         this.mIsFirstIn = isFirstIn;
     }
 
     public ScenicListAdapter( @Nullable List<ScenicBean.ContentlistBean> data, boolean isFirstIn) {
         super(data);
+        this.setOnItemClickListener(this);
         this.dataArr = data;
         this.mIsFirstIn = isFirstIn;
         init();
@@ -88,8 +91,8 @@ public class ScenicListAdapter extends BaseQuickAdapter<ScenicBean.ContentlistBe
     @Override
     protected void convert(BaseViewHolder helper, ScenicBean.ContentlistBean item) {
         if (helper.getItemViewType()==ItemType.HEAD) {
-            helper.setText(R.id.tv_item_header_location, TourGuide.getConfiguration(ConfigKeys
-                    .CITY));
+//            if (TourGuide.getConfiguration(ConfigKeys.CITY)!=null)
+            helper.setText(R.id.tv_item_header_location, "北京");
             helper.addOnClickListener(R.id.layout_item_header_location);
             helper.setText(R.id.item_scenit_list_title, item.getName());
             if (item.getAddress() != null) {
@@ -134,4 +137,10 @@ public class ScenicListAdapter extends BaseQuickAdapter<ScenicBean.ContentlistBe
         convert(holder, mData.get(position));
     }
 
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        Intent intent=new Intent(mContext,AttractionsActivity.class);
+        intent.putExtra(INTENT_KEY_DATA,mData.get(position));
+        startActivity(intent);
+    }
 }

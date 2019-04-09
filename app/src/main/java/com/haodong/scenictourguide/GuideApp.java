@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Vibrator;
 
 import com.baidu.mapapi.SDKInitializer;
+import com.haodong.scenictourguide.common.app.ConfigKeys;
 import com.haodong.scenictourguide.common.app.TourGuide;
 import com.haodong.scenictourguide.common.net.QueryCityInfoUtils;
 import com.haodong.scenictourguide.service.LocationService;
@@ -37,6 +38,7 @@ public class GuideApp extends Application {
         mVibrator =(Vibrator)getApplicationContext().getSystemService(Service.VIBRATOR_SERVICE);
         SDKInitializer.initialize(getApplicationContext());
         refWatcher= LeakCanary.install(this);
+        TourGuide.setConfiguration(ConfigKeys.CITY,"北京");
     }
     RefWatcher refWatcher;
     public static RefWatcher getRefWatcher(Context context) {

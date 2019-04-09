@@ -20,7 +20,7 @@
         app:cardUseCompatPadding="true">
 
         <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/item_scenit_list_img"
+            android:id="@+id/item_scenic_list_img"
             android:layout_width="match_parent"
             android:layout_height="@dimen/len_256"
             android:src="@drawable/bg_src_tianjin" />

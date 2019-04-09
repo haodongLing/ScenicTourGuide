@@ -30,13 +30,15 @@ public class AttractionsActivity extends MyActivity {
         MyFragment fragment = findFragment(AttractionFragment.class);
         AttractionFragment attractionFragment = AttractionFragment.newInstance();
         if (getIntent().getParcelableExtra(INTENT_KEY_DATA) != null) {
-            Log.e("lhl", "initData: "+getIntent().getParcelableExtra(INTENT_KEY_DATA).toString());
+            ScenicBean.ContentlistBean contentlistBean=
+                    getIntent().getParcelableExtra(INTENT_KEY_DATA);
+            Log.e("lhl",
+                    "initArgs: "+contentlistBean.getPicList().toString()+contentlistBean.getAttention().toString() );
             Bundle bundle = new Bundle();
             bundle.putParcelable(INTENT_KEY_DATA, getIntent().getParcelableExtra(INTENT_KEY_DATA));
             bundle.putString("1","s");
             attractionFragment.setArguments(bundle);
         }
-
         if (fragment == null) {
             loadRootFragment(R.id.attractions_root_view, attractionFragment);
         }

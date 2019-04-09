@@ -1,6 +1,7 @@
 package com.haodong.scenictourguide.location;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.haodong.scenictourguide.R;
 import com.haodong.scenictourguide.common.app.fragments.PresenterFragment;
+import com.haodong.scenictourguide.location.data.ImgAdapter;
 import com.haodong.scenictourguide.location.data.ScenicBean;
 import com.haodong.scenictourguide.location.data.contractor.AttractionContract;
 
@@ -22,12 +24,13 @@ import static com.haodong.scenictourguide.location.IntentKeys.INTENT_KEY_DATA;
  * email 105354999@qq.com
  */
 public class AttractionFragment extends PresenterFragment<AttractionContract.Presenter> implements AttractionContract
-        .View {
+        .View, View.OnClickListener {
     private ScenicBean.ContentlistBean mContentlistBean = null;
     private RecyclerView mRvImg;
     private TextView mTvName, mTvContent, mTvSummery, mTvAttention,mTvLocation;
     private ImageView mIvBack, mIvCollect;
     private FrameLayout mLayoutRemark;
+    private ImgAdapter mAdapter;
 
     @Override
     public AttractionContract.Presenter initPresenter() {
@@ -51,11 +54,15 @@ public class AttractionFragment extends PresenterFragment<AttractionContract.Pre
         mTvContent = root.findViewById(R.id.attraction_content);
         mTvSummery = root.findViewById(R.id.attraction_summery);
         mRvImg = root.findViewById(R.id.recycler_img);
+        mRvImg.setLayoutManager(new LinearLayoutManager(getActivity(),
+                LinearLayoutManager.HORIZONTAL,false));
         mIvBack = root.findViewById(R.id.attraction_back);
         mIvCollect = root.findViewById(R.id.attraction_img);
         mLayoutRemark = root.findViewById(R.id.layout_remark);
         mTvLocation=root.findViewById(R.id.attraction_location);
+        mIvBack.setOnClickListener(this);
 
+        mLayoutRemark.setOnClickListener(this);
     }
 
     @Override
@@ -63,7 +70,7 @@ public class AttractionFragment extends PresenterFragment<AttractionContract.Pre
         super.initArgs(bundle);
         if (bundle.getParcelable(INTENT_KEY_DATA) != null){
             mContentlistBean = bundle.getParcelable(INTENT_KEY_DATA);
-            Log.e("lhl", "initArgs: "+mContentlistBean.toString() );
+//            Log.e("lhl", "initArgs: "+mContentlistBean.toString() );
         }
         Log.e("lhl", "onNewBundle: "+ bundle.getString("1"));
     }
@@ -90,6 +97,15 @@ public class AttractionFragment extends PresenterFragment<AttractionContract.Pre
             if (mContentlistBean.getAddress()!=null){
                 mTvLocation.setText(mContentlistBean.getAddress());
             }
+//            Log.e("lhl",
+//                    "initData: mContentlistBean.getPicList()"+mContentlistBean.getPicList().toString());
+            mAdapter=new ImgAdapter(mContentlistBean.getPicList());
+            mRvImg.setAdapter(mAdapter);
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }
