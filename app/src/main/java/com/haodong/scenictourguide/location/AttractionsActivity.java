@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.haodong.scenictourguide.MainActivity;
 import com.haodong.scenictourguide.R;
 import com.haodong.scenictourguide.common.app.activities.MyActivity;
 import com.haodong.scenictourguide.common.app.fragments.MyFragment;
+import com.haodong.scenictourguide.common.utils.AppUtils;
 import com.haodong.scenictourguide.location.data.ScenicBean;
 
 import static com.haodong.scenictourguide.location.IntentKeys.INTENT_KEY_DATA;
@@ -19,6 +21,10 @@ public class AttractionsActivity extends MyActivity {
         return R.layout.activity_attractions;
     }
 
+    @Override
+    protected void initWindows() {
+        AppUtils.setInmmersiveStatusBar(AttractionsActivity.this);
+    }
     @Override
     protected void initWidget() {
         super.initWidget();
