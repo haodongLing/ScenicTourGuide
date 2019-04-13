@@ -12,6 +12,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.haodong.scenictourguide.DataTools;
 import com.haodong.scenictourguide.R;
 import com.haodong.scenictourguide.common.app.ConfigKeys;
 import com.haodong.scenictourguide.common.app.TourGuide;
@@ -140,7 +141,8 @@ public class ScenicListAdapter extends BaseQuickAdapter<ScenicBean.ContentlistBe
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         Intent intent=new Intent(mContext,AttractionsActivity.class);
-        intent.putExtra(INTENT_KEY_DATA,mData.get(position));
+//        intent.putExtra(INTENT_KEY_DATA,mData.get(position));
         startActivity(intent);
+        DataTools.getInstance().setContentListBean(mData.get(position));
     }
 }

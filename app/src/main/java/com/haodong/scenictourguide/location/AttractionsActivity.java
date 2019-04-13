@@ -2,6 +2,7 @@ package com.haodong.scenictourguide.location;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.haodong.scenictourguide.MainActivity;
@@ -10,6 +11,7 @@ import com.haodong.scenictourguide.common.app.activities.MyActivity;
 import com.haodong.scenictourguide.common.app.fragments.MyFragment;
 import com.haodong.scenictourguide.common.utils.AppUtils;
 import com.haodong.scenictourguide.location.data.ScenicBean;
+import com.haodong.scenictourguide.track.DynamicFragment;
 
 import static com.haodong.scenictourguide.location.IntentKeys.INTENT_KEY_DATA;
 
@@ -35,18 +37,16 @@ public class AttractionsActivity extends MyActivity {
         super.initData();
         MyFragment fragment = findFragment(AttractionFragment.class);
         AttractionFragment attractionFragment = AttractionFragment.newInstance();
-        if (getIntent().getParcelableExtra(INTENT_KEY_DATA) != null) {
-            ScenicBean.ContentlistBean contentlistBean=
-                    getIntent().getParcelableExtra(INTENT_KEY_DATA);
-            Log.e("lhl",
-                    "initArgs: "+contentlistBean.getPicList().toString()+contentlistBean.getAttention().toString() );
-            Bundle bundle = new Bundle();
-            bundle.putParcelable(INTENT_KEY_DATA, getIntent().getParcelableExtra(INTENT_KEY_DATA));
-            bundle.putString("1","s");
-            attractionFragment.setArguments(bundle);
-        }
         if (fragment == null) {
             loadRootFragment(R.id.attractions_root_view, attractionFragment);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode== DynamicFragment.REQUEST_CODE_CHOOSE&&resultCode==RESULT_OK){
+            findFragment(DynamicFragment.class).onActivityResult(requestCode,resultCode,data);
         }
     }
 }

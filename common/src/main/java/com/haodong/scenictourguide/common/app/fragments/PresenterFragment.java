@@ -49,7 +49,7 @@ public abstract class PresenterFragment<Presenter extends BaseContract.Presenter
 
     @Override
     public boolean onBackPressed() {
-        return super.onBackPressed();
+        return true;
     }
 
 }

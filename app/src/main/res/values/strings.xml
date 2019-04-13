@@ -12,4 +12,9 @@
     <string name="label_go_register">没有账户？去注册</string>
     <string name="label_login">登陆</string>
     <string name="label_permissions">权限授予</string>
+    <string name="is_save_change">Do you want to save your changes?</string>
+    <string name="save_change">Save</string>
+    <string name="not_save_change">Not save</string>
+    <string name="cancel_save_change">Cancel</string>
+    <string name="screen_successfully">Set as charging screen successfully</string>
 </resources>

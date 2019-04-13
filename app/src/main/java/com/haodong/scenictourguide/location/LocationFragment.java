@@ -134,12 +134,6 @@ public class LocationFragment extends PresenterFragment<LocationContact.Presente
             mAdapter.addData(scenicBean.getContentlist());
             mAdapter.notifyDataSetChanged();
         }
-//       mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-//           @Override
-//           public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//
-//           }
-//       });
         mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {

@@ -10,24 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/attractions_bottom_view"/>
-    <LinearLayout
-        android:id="@+id/attractions_bottom_view"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/len_52"
-        android:orientation="horizontal"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent" >
-        <ImageView
-            android:layout_width="@dimen/len_28"
-            android:layout_height="@dimen/len_28"
-            android:src="@drawable/ic_write"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/font_16"
-            android:text="写点评"
-            android:textColor="@color/colorTxtSelected"
-            android:layout_marginLeft="@dimen/len_6"/>
-    </LinearLayout>
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
 </android.support.constraint.ConstraintLayout>

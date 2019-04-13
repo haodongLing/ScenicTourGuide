@@ -3,19 +3,19 @@ package com.haodong.scenictourguide.location;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.haodong.scenictourguide.DataTools;
 import com.haodong.scenictourguide.R;
 import com.haodong.scenictourguide.common.app.fragments.PresenterFragment;
 import com.haodong.scenictourguide.location.data.ImgAdapter;
 import com.haodong.scenictourguide.location.data.ScenicBean;
 import com.haodong.scenictourguide.location.data.contractor.AttractionContract;
-
-import static com.haodong.scenictourguide.location.IntentKeys.INTENT_KEY_DATA;
+import com.haodong.scenictourguide.track.DynamicFragment;
 
 /**
  * describe :
@@ -27,10 +27,11 @@ public class AttractionFragment extends PresenterFragment<AttractionContract.Pre
         .View, View.OnClickListener {
     private ScenicBean.ContentlistBean mContentlistBean = null;
     private RecyclerView mRvImg;
-    private TextView mTvName, mTvContent, mTvSummery, mTvAttention,mTvLocation;
+    private TextView mTvName, mTvContent, mTvSummery, mTvAttention, mTvLocation;
     private ImageView mIvBack, mIvCollect;
     private FrameLayout mLayoutRemark;
     private ImgAdapter mAdapter;
+    private LinearLayout mLayoutBottomView;
 
     @Override
     public AttractionContract.Presenter initPresenter() {
@@ -55,24 +56,21 @@ public class AttractionFragment extends PresenterFragment<AttractionContract.Pre
         mTvSummery = root.findViewById(R.id.attraction_summery);
         mRvImg = root.findViewById(R.id.recycler_img);
         mRvImg.setLayoutManager(new LinearLayoutManager(getActivity(),
-                LinearLayoutManager.HORIZONTAL,false));
+                LinearLayoutManager.HORIZONTAL, false));
         mIvBack = root.findViewById(R.id.attraction_back);
         mIvCollect = root.findViewById(R.id.attraction_img);
         mLayoutRemark = root.findViewById(R.id.layout_remark);
-        mTvLocation=root.findViewById(R.id.attraction_location);
+        mTvLocation = root.findViewById(R.id.attraction_location);
+        mLayoutBottomView = root.findViewById(R.id.attractions_bottom_view);
+        mLayoutBottomView.setOnClickListener(this);
         mIvBack.setOnClickListener(this);
-
+        mIvCollect.setOnClickListener(this);
         mLayoutRemark.setOnClickListener(this);
     }
 
     @Override
     protected void initArgs(Bundle bundle) {
         super.initArgs(bundle);
-        if (bundle.getParcelable(INTENT_KEY_DATA) != null){
-            mContentlistBean = bundle.getParcelable(INTENT_KEY_DATA);
-//            Log.e("lhl", "initArgs: "+mContentlistBean.toString() );
-        }
-        Log.e("lhl", "onNewBundle: "+ bundle.getString("1"));
     }
 
     @Override
@@ -83,29 +81,45 @@ public class AttractionFragment extends PresenterFragment<AttractionContract.Pre
     @Override
     protected void initData() {
         super.initData();
-        if (mContentlistBean!=null){
+        mContentlistBean = DataTools.getInstance().getContentListBean();
+        if (mContentlistBean != null) {
             mTvName.setText(mContentlistBean.getName());
-            if (mContentlistBean.getSummary()!=null){
+            if (mContentlistBean.getSummary() != null) {
                 mTvSummery.setText(mContentlistBean.getSummary());
             }
-            if (mContentlistBean.getContent()!=null){
+            if (mContentlistBean.getContent() != null) {
                 mTvContent.setText(mContentlistBean.getContent());
             }
-            if (mContentlistBean.getAttention()!=null){
+            if (mContentlistBean.getAttention() != null) {
                 mTvAttention.setText(mContentlistBean.getAttention());
             }
-            if (mContentlistBean.getAddress()!=null){
+            if (mContentlistBean.getAddress() != null) {
                 mTvLocation.setText(mContentlistBean.getAddress());
             }
-//            Log.e("lhl",
-//                    "initData: mContentlistBean.getPicList()"+mContentlistBean.getPicList().toString());
-            mAdapter=new ImgAdapter(mContentlistBean.getPicList());
+            mAdapter = new ImgAdapter(mContentlistBean.getPicList());
             mRvImg.setAdapter(mAdapter);
         }
     }
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.attraction_back:
+                break;
+            case R.id.layout_remark:
 
+                break;
+            case R.id.attraction_img:
+                break;
+            case R.id.attractions_bottom_view:
+                start(new DynamicFragment());
+                break;
+        }
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        onDestroy();
+        return true;
     }
 }

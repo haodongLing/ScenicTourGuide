@@ -44,10 +44,10 @@
             <ImageView
                 android:id="@+id/iv_tab_location_search"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/len_24"
+                android:layout_height="@dimen/len_28"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:src="@drawable/ic_search" />
+                android:src="@drawable/search" />
         </android.support.v7.widget.LinearLayoutCompat>
     </android.support.v7.widget.Toolbar>
 

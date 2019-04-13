@@ -74,6 +74,11 @@ public class LocationDataConverter extends DataConverter<ScenicBean> {
             if (content!=null&&!content.equals("")){
                 contentlistBean.setContent(content);
             }
+            /*6. attention*/
+            final String attention=data.getString("attention");
+            if (attention!=null&&!attention.equals("")){
+                contentlistBean.setAttention(attention);
+            }
             List<ScenicBean.ContentlistBean.PicListBean>picListBeans=new ArrayList<>();
             /*6. 图片URL*/
             final JSONArray picList=data.getJSONArray("picList");
