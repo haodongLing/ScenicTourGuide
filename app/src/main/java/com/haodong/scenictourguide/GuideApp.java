@@ -2,12 +2,16 @@ package com.haodong.scenictourguide;
 
 import android.app.Application;
 import android.app.Service;
+import android.content.Context;
 import android.os.Vibrator;
 
 import com.baidu.mapapi.SDKInitializer;
+import com.haodong.scenictourguide.common.app.ConfigKeys;
 import com.haodong.scenictourguide.common.app.TourGuide;
 import com.haodong.scenictourguide.common.net.QueryCityInfoUtils;
 import com.haodong.scenictourguide.service.LocationService;
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 
 /**
  * describe :
@@ -33,5 +37,13 @@ public class GuideApp extends Application {
         locationService = new LocationService(getApplicationContext());
         mVibrator =(Vibrator)getApplicationContext().getSystemService(Service.VIBRATOR_SERVICE);
         SDKInitializer.initialize(getApplicationContext());
+        refWatcher= LeakCanary.install(this);
+        TourGuide.setConfiguration(ConfigKeys.CITY,"北京");
     }
+    RefWatcher refWatcher;
+    public static RefWatcher getRefWatcher(Context context) {
+        GuideApp application = (GuideApp) context.getApplicationContext();
+        return application.refWatcher;
+    }
+
 }

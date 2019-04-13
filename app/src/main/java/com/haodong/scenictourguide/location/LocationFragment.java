@@ -132,16 +132,14 @@ public class LocationFragment extends PresenterFragment<LocationContact.Presente
             mAdapter.notifyDataSetChanged();
         } else {
             mAdapter.addData(scenicBean.getContentlist());
-            mAdapter.notifyItemChanged(mAdapter.getItemCount());
+            mAdapter.notifyDataSetChanged();
         }
-       mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-           @Override
-           public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-               Intent intent=new Intent(getActivity(),AttractionsActivity.class);
-               intent.putExtra(INTENT_KEY_DATA,scenicBean.getContentlist().get(position));
-               startActivity(intent);
-           }
-       });
+//       mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+//           @Override
+//           public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+//
+//           }
+//       });
         mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
