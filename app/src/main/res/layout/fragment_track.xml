@@ -1,12 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/navigation_track"
-        android:textSize="@dimen/font_20"
-        />
 
+    <com.haodong.scenictourguide.common.ui.MyVerticalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
+
+            <ImageView
+                android:id="@+id/track_im_header"
+                android:layout_width="match_parent"
+                android:layout_height="252dp"
+                android:layout_marginBottom="@dimen/len_48"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerCrop"
+                android:src="@drawable/default_portrait" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/track_im_portrait"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="@dimen/len_16"
+                android:src="@drawable/ic_launcher"
+                app:civ_border_color="@color/white"
+                app:civ_border_width="2dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/track_im_portrait"
+                android:layout_marginBottom="@dimen/len_16"
+                android:layout_marginLeft="@dimen/len_24"
+                android:text="奔腾年代"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <Button
+                android:layout_width="@dimen/len_156"
+                android:layout_height="@dimen/len_44"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/len_24"
+                android:layout_marginBottom="26dp"
+                android:background="@drawable/bg_btn_daka"
+                android:text="0个足迹"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_16"
+                 />
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+    </com.haodong.scenictourguide.common.ui.MyVerticalScrollView>
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/len_76"
+        android:background="@color/trans"
+        android:paddingTop="@dimen/len_24">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="我的足迹"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_18" />
+        </FrameLayout>
+    </android.support.design.widget.AppBarLayout>
 </android.support.constraint.ConstraintLayout>

@@ -9,16 +9,19 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.githang.statusbar.StatusBarTools;
 import com.haodong.scenictourguide.R;
 import com.haodong.scenictourguide.common.app.fragments.PresenterFragment;
 import com.haodong.scenictourguide.track.contractor.DynamicContract;
 import com.haodong.scenictourguide.track.dialog.BottomRemindDialog;
+import com.haodong.scenictourguide.track.draghelper.ItemDragHelperCallback;
 import com.haodong.scenictourguide.track.recycler.SlideImage;
 import com.haodong.scenictourguide.track.recycler.SlideImageAdapter;
 import com.zhihu.matisse.Matisse;
@@ -69,7 +72,17 @@ public class DynamicFragment extends PresenterFragment<DynamicContract.Presenter
         mRvImg = root.findViewById(R.id.dynamic_rv);
         GridLayoutManager manager = new GridLayoutManager(getActivity(), 3);
         mRvImg.setLayoutManager(manager);
+        ItemDragHelperCallback callback = new ItemDragHelperCallback() {
+            @Override
+            public boolean isLongPressDragEnabled() {
+                // 长按拖拽打开
+                return true;
+            }
+        };
+        ItemTouchHelper helper = new ItemTouchHelper(callback);
+        helper.attachToRecyclerView(mRvImg);
 
+        /*onCLick*/
         mImgBack.setOnClickListener(this);
         mLayoutRemind.setOnClickListener(this);
         mTvFabu.setOnClickListener(this);

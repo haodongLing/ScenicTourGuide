@@ -24,5 +24,6 @@
     <color name="windowsBackgroundLight">#f8f8f8</color>
     <color name="text_color_normal">#666666</color>
     <color name="text_color">#333642</color>
+    <color name="color_light_blue">#00CCFF</color>
 
 </resources>

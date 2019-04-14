@@ -77,5 +77,7 @@ dependencies {
     //Banner依赖
     api 'com.bigkoo:convenientbanner:2.0.5'
     api 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
+    api 'jp.wasabeef:blurry:3.0.0'
+    api 'de.hdodenhof:circleimageview:3.0.0'
 
 }

@@ -3,36 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <LinearLayout
-        android:id="@+id/mine_layout_header"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/mine_app_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/len_76"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/len_16"
-        android:paddingRight="@dimen/len_16"
+        android:background="#4DEE7C3D"
         android:paddingTop="@dimen/len_24">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/mine_img_setting"
-            android:layout_width="@dimen/len_24"
-            android:layout_height="@dimen/len_24"
-            android:src="@drawable/ic_fenlei_color" />
+            <ImageView
+                android:id="@+id/mine_img_setting"
+                android:layout_width="@dimen/len_28"
+                android:layout_height="@dimen/len_28"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/len_16"
+                android:src="@drawable/ic_fenlei_color" />
 
-        <ImageView
-            android:id="@+id/mine_img_scan"
-            android:layout_width="@dimen/len_24"
-            android:layout_height="@dimen/len_24"
-            android:layout_marginLeft="@dimen/len_10"
-            android:src="@drawable/ic_scan_color" />
+            <ImageView
+                android:id="@+id/mine_img_scan"
+                android:layout_width="@dimen/len_28"
+                android:layout_height="@dimen/len_28"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/mine_img_setting"
+                android:layout_marginLeft="@dimen/len_10"
+                android:src="@drawable/ic_scan_color" />
 
-        <ImageView
-            android:id="@+id/mine_img_message"
-            android:layout_width="@dimen/len_24"
-            android:layout_height="@dimen/len_24"
-            android:layout_gravity="right"
-            android:src="@drawable/ic_pinlun_color" />
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/mine_img_message"
+                android:layout_width="@dimen/len_28"
+                android:layout_height="@dimen/len_28"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/len_16"
+                android:src="@drawable/ic_pinlun_color" />
+        </RelativeLayout>
+    </android.support.design.widget.AppBarLayout>
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/mine_layout_mine_info"
@@ -40,7 +47,8 @@
         android:layout_height="@dimen/len_72"
         android:paddingLeft="16dp"
         android:paddingRight="@dimen/len_16"
-        app:layout_constraintTop_toBottomOf="@+id/mine_layout_header">
+        app:layout_constraintTop_toBottomOf="@+id/mine_app_bar"
+        >
 
         <ImageView
             android:id="@+id/mine_img_avator"
@@ -131,20 +139,60 @@
             android:layout_marginTop="@dimen/len_12"/>
     </android.support.constraint.ConstraintLayout>
     <Button
+        android:id="@+id/mine_jilu"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="@id/mine_layout_mine_info"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHeight_percent="0.12"
+        app:layout_constraintHeight_percent="0.1"
         app:layout_constraintWidth_percent="0.7"
         android:background="@drawable/bg_btn_daka"
         app:layout_constraintVertical_bias="0.25"
-        android:text="打卡"
+        android:text="记录我的旅行"
         android:textSize="@dimen/font_20"
         android:textColor="@color/white"
         android:textStyle="bold"
         />
+    <View
+        android:id="@+id/mine_view_1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/len_8"
+        android:background="@color/black_alpha_16"
+        app:layout_constraintTop_toBottomOf="@id/mine_jilu"
+        android:layout_marginTop="@dimen/len_16"
+        />
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/mine_constrait_1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/len_72"
+        app:layout_constraintTop_toBottomOf="@id/mine_view_1">
+        <Button
+            android:layout_width="@dimen/len_92"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/len_16"
+            android:layout_marginBottom="@dimen/len_16"
+            android:layout_marginRight="@dimen/len_16"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@color/colorTxtSelected"
+            android:text="打卡"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_16" />
+    </android.support.constraint.ConstraintLayout>
+    <View
+        android:id="@+id/mine_view_2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/len_8"
+        android:background="@color/black_alpha_16"
+        app:layout_constraintTop_toBottomOf="@id/mine_constrait_1"
+        />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/mine_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/mine_view_2"
+        android:layout_marginTop="@dimen/len_12">
 
+    </android.support.v7.widget.RecyclerView>
 </android.support.constraint.ConstraintLayout>
