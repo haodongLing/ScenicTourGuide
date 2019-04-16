@@ -20,7 +20,13 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/len_16"
                 android:src="@drawable/ic_fenlei_color" />
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+               android:layout_centerInParent="true"
+                android:text="我的主页"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_18" />
             <ImageView
                 android:id="@+id/mine_img_scan"
                 android:layout_width="@dimen/len_28"
@@ -190,8 +196,9 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/mine_recycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@+id/mine_view_2"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="@dimen/len_12">
 
     </android.support.v7.widget.RecyclerView>

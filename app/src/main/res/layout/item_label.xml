@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/len_60"
     android:gravity="center_vertical"
+    android:background="@color/colorTxtSelected"
     android:paddingLeft="@dimen/len_16">
 
     <TextView
@@ -10,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="北京必体验"
-        android:textColor="@color/black_alpha_192"
+        android:textColor="@color/white"
         android:textSize="@dimen/font_28" />
 
 </LinearLayout>

@@ -17,14 +17,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-
-    <android.support.v7.widget.Toolbar
+    <android.support.design.widget.AppBarLayout
         android:id="@+id/tab_location"
         android:layout_width="match_parent"
         android:layout_height="@dimen/len_76"
-        android:background="@color/color_light_blue"
+        android:background="@color/trans"
         app:layout_behavior="com.haodong.scenictourguide.location.TranslucentBehavior">
-
         <android.support.v7.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -47,8 +45,7 @@
                 android:layout_height="@dimen/len_28"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:src="@drawable/search" />
+                android:src="@drawable/ic_search_white" />
         </android.support.v7.widget.LinearLayoutCompat>
-    </android.support.v7.widget.Toolbar>
-
+    </android.support.design.widget.AppBarLayout>
 </android.support.design.widget.CoordinatorLayout>

@@ -2,6 +2,7 @@ package com.haodong.scenictourguide.location;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
@@ -18,7 +19,7 @@ import com.haodong.scenictourguide.common.app.TourGuide;
  */
 
 @SuppressWarnings("unused")
-public final class TranslucentBehavior extends CoordinatorLayout.Behavior<Toolbar> {
+public final class TranslucentBehavior extends CoordinatorLayout.Behavior<AppBarLayout> {
 
     //注意这个变量一定要定义成类变量
     private int mOffset = 0;
@@ -30,14 +31,14 @@ public final class TranslucentBehavior extends CoordinatorLayout.Behavior<Toolba
     }
 
     @Override
-    public boolean layoutDependsOn(CoordinatorLayout parent, Toolbar child, View dependency) {
+    public boolean layoutDependsOn(CoordinatorLayout parent, AppBarLayout child, View dependency) {
         return dependency.getId() == R.id.rv_location;
     }
 
     @Override
     public boolean onStartNestedScroll(
             @NonNull CoordinatorLayout coordinatorLayout
-            , @NonNull Toolbar child
+            , @NonNull AppBarLayout child
             , @NonNull View directTargetChild
             , @NonNull View target
             , int axes
@@ -48,7 +49,7 @@ public final class TranslucentBehavior extends CoordinatorLayout.Behavior<Toolba
     @Override
     public void onNestedScroll(
             @NonNull CoordinatorLayout coordinatorLayout
-            , @NonNull Toolbar toolbar
+            , @NonNull AppBarLayout toolbar
             , @NonNull View target
             , int dxConsumed
             , int dyConsumed
