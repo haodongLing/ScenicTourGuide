@@ -4,11 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/len_72"
         android:background="@color/colorTxtSelected"
         android:paddingTop="@dimen/len_24">
+
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -38,11 +40,11 @@
                 android:id="@+id/main_viewpager"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/len_224"
-                app:icvp_center_page_scale_offset="@dimen/len_16"
+                app:icvp_center_page_scale_offset="@dimen/len_10"
                 app:icvp_interpolator="@android:anim/accelerate_decelerate_interpolator"
-                app:icvp_max_page_scale="0.9"
+                app:icvp_max_page_scale="0.8"
                 app:icvp_medium_scaled="false"
-                app:icvp_min_page_scale="0.75"
+                app:icvp_min_page_scale="0.55"
                 app:icvp_min_page_scale_offset="5dp"
                 app:icvp_scroll_duration="250" />
 

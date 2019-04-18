@@ -39,9 +39,9 @@ public class MineFragment extends MyFragment {
 
     @Override
     protected void initData() {
-        int[] imgId = new int[]{R.drawable.ic_shoucang_color, R.drawable.ic_download, R.drawable.ic_dingdan, R.drawable
+        int[] imgId = new int[]{R.drawable.ic_xin, R.drawable.ic_xiazai, R.drawable.ic_dingdan, R.drawable
                 .ic_youji, R
-                .drawable.ic_wenda, R.drawable.ic_dianpng, R.drawable.ic_youhuiquan, R.drawable.ic_qianbao, R.drawable
+                .drawable.ic_wenda, R.drawable.ic_dianpng, R.drawable.ic_youhui, R.drawable.ic_qianbao, R.drawable
                 .ic_huodong, R.drawable.ic_fenxiang, R.drawable.ic_wuping};
         String[] strings = new String[]{"我的收藏", "我的下载", "我的订单", "我的游记", "我的问答", "我的点评", "优惠券", "我的钱包", "我的活动",
                 "分享有礼", "旅游好物"};

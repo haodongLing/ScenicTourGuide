@@ -7,7 +7,7 @@
         android:id="@+id/mine_app_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/len_76"
-        android:background="#4DEE7C3D"
+        android:background="#EE7C3D"
         android:paddingTop="@dimen/len_24">
         <RelativeLayout
             android:layout_width="match_parent"
