@@ -28,9 +28,9 @@
             android:textStyle="bold"
             android:textSize="@dimen/font_18"/>
         <ImageView
-            android:layout_width="@dimen/len_16"
-            android:layout_height="@dimen/len_16"
-            android:src="@drawable/ic_pull_color"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_location2"
             android:layout_marginLeft="@dimen/len_8"
             />
 

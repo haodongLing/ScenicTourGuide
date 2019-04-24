@@ -1,5 +1,7 @@
 package com.haodong.scenictourguide.location.data.contractor;
 
+import android.content.Intent;
+
 import com.haodong.scenictourguide.common.presenter.BaseContract;
 import com.haodong.scenictourguide.location.data.ScenicBean;
 
@@ -13,5 +15,6 @@ public interface LocationContact {
         void showData(ScenicBean scenicBean);
         void showNoMoreData();
         void showToolBar();
+        void onLocationRechecked(Intent intent);
     }
 }

@@ -34,6 +34,11 @@ public class ScenicListAdapter extends BaseQuickAdapter<ScenicBean.ContentlistBe
     private List<ScenicBean.ContentlistBean> dataArr = null;
     private boolean mIsFirstIn = true;
     private Context mCOntext;
+    private String mLocation;
+
+    public void setLocation(String mLocation) {
+        this.mLocation = mLocation;
+    }
 
     //设置图片加载策略
     private static final RequestOptions RECYCLER_OPTIONS =
@@ -51,7 +56,7 @@ public class ScenicListAdapter extends BaseQuickAdapter<ScenicBean.ContentlistBe
         this.mIsFirstIn = isFirstIn;
     }
 
-    public ScenicListAdapter( @Nullable List<ScenicBean.ContentlistBean> data, boolean isFirstIn) {
+    public ScenicListAdapter(@Nullable List<ScenicBean.ContentlistBean> data, boolean isFirstIn) {
         super(data);
         this.setOnItemClickListener(this);
         this.dataArr = data;
@@ -60,10 +65,6 @@ public class ScenicListAdapter extends BaseQuickAdapter<ScenicBean.ContentlistBe
     }
 
     private void init() {
-    }
-
-    public ScenicListAdapter(int layoutResId) {
-        super(layoutResId);
     }
 
     @Override
@@ -79,11 +80,11 @@ public class ScenicListAdapter extends BaseQuickAdapter<ScenicBean.ContentlistBe
 
     @Override
     protected BaseViewHolder onCreateDefViewHolder(ViewGroup parent, int viewType) {
-        View view=null;
-        if (viewType== ItemType.HEAD){
-            view=getItemView(R.layout.item_scenic_header, parent);
-        }else {
-          view=getItemView(R.layout.item_list_scenic, parent);
+        View view = null;
+        if (viewType == ItemType.HEAD) {
+            view = getItemView(R.layout.item_scenic_header, parent);
+        } else {
+            view = getItemView(R.layout.item_list_scenic, parent);
         }
         return new HeadViewHolder(view);
     }
@@ -91,16 +92,23 @@ public class ScenicListAdapter extends BaseQuickAdapter<ScenicBean.ContentlistBe
 
     @Override
     protected void convert(BaseViewHolder helper, ScenicBean.ContentlistBean item) {
-        if (helper.getItemViewType()==ItemType.HEAD) {
+        if (helper.getItemViewType() == ItemType.HEAD) {
 //            if (TourGuide.getConfiguration(ConfigKeys.CITY)!=null)
-            helper.setText(R.id.tv_item_header_location, "北京");
+            if (mLocation != null) {
+                helper.setText(R.id.tv_item_header_location, mLocation);
+                helper.setText(R.id.tv_item_label_label, mLocation + "必体验");
+            } else {
+                helper.setText(R.id.tv_item_header_location, "北京");
+                helper.setText(R.id.tv_item_label_label, mLocation + "必体验");
+            }
+
             helper.addOnClickListener(R.id.layout_item_header_location);
             helper.setText(R.id.item_scenit_list_title, item.getName());
             if (item.getAddress() != null) {
                 helper.setText(R.id.item_scenit_list_location, item.getAddress());
             }
             if (item.getPrice() != null) {
-                helper.setText(R.id.item_scenit_list_price, item.getPrice()+"起");
+                helper.setText(R.id.item_scenit_list_price, item.getPrice() + "起");
             }
             String imgUrl = item.getPicList().get(0).getPicUrl();
             if (imgUrl != null) {
@@ -109,7 +117,7 @@ public class ScenicListAdapter extends BaseQuickAdapter<ScenicBean.ContentlistBe
                         .apply(RECYCLER_OPTIONS)
                         .into((ImageView) helper.getView(R.id.item_scenit_list_img));
             }
-        } else if (helper.getItemViewType()==ItemType.CONTENT) {
+        } else if (helper.getItemViewType() == ItemType.CONTENT) {
             helper.setText(R.id.item_scenit_list_title, item.getName());
             if (item.getAddress() != null) {
                 helper.setText(R.id.item_scenit_list_location, item.getAddress());
@@ -140,7 +148,7 @@ public class ScenicListAdapter extends BaseQuickAdapter<ScenicBean.ContentlistBe
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        Intent intent=new Intent(mContext,AttractionsActivity.class);
+        Intent intent = new Intent(mContext, AttractionsActivity.class);
 //        intent.putExtra(INTENT_KEY_DATA,mData.get(position));
         startActivity(intent);
         DataTools.getInstance().setContentListBean(mData.get(position));

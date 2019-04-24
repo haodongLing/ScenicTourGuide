@@ -37,7 +37,7 @@ import static com.haodong.scenictourguide.location.IntentKeys.INTENT_KEY_DATA;
  * author linghailong
  * email 105354999@qq.com
  */
-public class LocationFragment extends PresenterFragment<LocationContact.Presenter>implements LocationContact.View {
+public class LocationFragment extends PresenterFragment<LocationContact.Presenter> implements LocationContact.View {
     ScenicListAdapter mAdapter;
     private boolean isPullToRefresh;
     @BindView(R.id.tab_location)
@@ -48,7 +48,7 @@ public class LocationFragment extends PresenterFragment<LocationContact.Presente
     RecyclerView mRecyclerView;
     private int currentPage;
     private int allPages;
-    private Handler mHandler=new Handler();
+    private Handler mHandler = new Handler();
 
 
     @Override
@@ -56,15 +56,14 @@ public class LocationFragment extends PresenterFragment<LocationContact.Presente
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == MyRequestCode.REQUEST_CODE_LOCATION && resultCode == MyResultCode
                 .RESULT_CODE_LOCATION) {
-            String location = data.getStringExtra("location");
-            mPresenter.loadFirstPage(1,location);
+            onLocationRechecked(data);
         }
     }
 
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
-        mPresenter.loadFirstPage(1,"北京");
+        mPresenter.loadFirstPage(1, "北京");
     }
 
     @Override
@@ -78,21 +77,21 @@ public class LocationFragment extends PresenterFragment<LocationContact.Presente
         mSrlayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
-                isPullToRefresh=true;
+                isPullToRefresh = true;
                 mTabLayout.setVisibility(View.GONE);
                 refreshLayout.finishRefresh(2000);
-                mPresenter.loadFirstPage(1,"北京");
+                mPresenter.loadFirstPage(1, "北京");
             }
         });
         mSrlayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshLayout) {
                 refreshLayout.finishLoadMore(2000);
-                isPullToRefresh=false;
-                if (currentPage>allPages){
+                isPullToRefresh = false;
+                if (currentPage > allPages) {
                     showNoMoreData();
-                }else {
-                    currentPage=currentPage+1;
+                } else {
+                    currentPage = currentPage + 1;
                     mPresenter.loadMorePage(currentPage);
                 }
             }
@@ -124,10 +123,10 @@ public class LocationFragment extends PresenterFragment<LocationContact.Presente
 
     @Override
     public void showData(ScenicBean scenicBean) {
-        if (mAdapter==null){
-            mAdapter=new ScenicListAdapter(scenicBean.getContentlist(),true);
+        if (mAdapter == null) {
+            mAdapter = new ScenicListAdapter(scenicBean.getContentlist(), true);
             mRecyclerView.setAdapter(mAdapter);
-            allPages=scenicBean.getAllPages();
+            allPages = scenicBean.getAllPages();
         } else if (isPullToRefresh) {
             mAdapter.setNewData(scenicBean.getContentlist());
             mAdapter.notifyDataSetChanged();
@@ -138,7 +137,7 @@ public class LocationFragment extends PresenterFragment<LocationContact.Presente
         mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                Log.e("tag", "onItemChildClick: " );
+                Log.e("tag", "onItemChildClick: ");
                 startActivityForResult(new Intent(getContext(), CitypickerActivity.class),
                         MyRequestCode.REQUEST_CODE_LOCATION);
             }
@@ -157,6 +156,16 @@ public class LocationFragment extends PresenterFragment<LocationContact.Presente
             public void run() {
                 mTabLayout.setVisibility(View.VISIBLE);
             }
-        },1800);
+        }, 1800);
+    }
+
+    @Override
+    public void onLocationRechecked(Intent intent) {
+        isPullToRefresh = true;
+        String location = intent.getStringExtra("location");
+        if (mAdapter != null) {
+            mAdapter.setLocation(location);
+        }
+        mPresenter.loadFirstPage(1, location);
     }
 }

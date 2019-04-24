@@ -14,7 +14,6 @@ public class UrlToos {
                 .addTextPara("keyword",location)
                 .addTextPara("page", page)
                 .getUrlString();
-        String endUrl="http://route.showapi.com/268-1?"+url;
-        return endUrl;
+        return "http://route.showapi.com/268-1?"+url;
     }
 }
