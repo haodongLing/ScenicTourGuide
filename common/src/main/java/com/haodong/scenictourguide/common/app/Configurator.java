@@ -57,7 +57,7 @@ public final class Configurator {
     }
     /**
      * 为APPKEY
-     * @param delayed
+     * @param appKey
      * @return
      */
     public final Configurator withAppKey(String appKey) {

@@ -33,7 +33,7 @@ public class CitypickerActivity extends MyActivity {
                         TourGuide.setConfiguration(ConfigKeys.CITY, data.getName());
                         TourGuide.setConfiguration(ConfigKeys.PROVINCE, data.getProvince());
                         Intent intent = getIntent();
-                        String location = "锦州";
+                        String location =data.getName();
                         intent.putExtra("location", location);
                         setResult(MyResultCode.RESULT_CODE_LOCATION, intent);
                         finish();

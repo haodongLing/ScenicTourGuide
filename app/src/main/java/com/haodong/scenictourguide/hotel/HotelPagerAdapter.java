@@ -1,4 +1,4 @@
-package com.haodong.scenictourguide.main.viewpager;
+package com.haodong.scenictourguide.hotel;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
@@ -7,28 +7,32 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.haodong.scenictourguide.R;
+import com.haodong.scenictourguide.main.viewpager.ViewPagerUtils;
 
 import static com.haodong.scenictourguide.main.viewpager.ViewPagerUtils.setupItem;
 
-public class HorizontalPagerAdapter extends PagerAdapter {
+public class HotelPagerAdapter extends PagerAdapter {
 
     private final ViewPagerUtils.LibraryObject[] LIBRARIES = new ViewPagerUtils.LibraryObject[]{
             new ViewPagerUtils.LibraryObject(
-                    R.drawable.img_jingzhou1
+                    R.drawable.img_beijing1
             ),
             new ViewPagerUtils.LibraryObject(
-                    R.drawable.img_jingzhou2
+                    R.drawable.img_beijing2
             ),
             new ViewPagerUtils.LibraryObject(
-                    R.drawable.img_jingzhou4
-            )
+                    R.drawable.img_beijing3
+            ),
+            new ViewPagerUtils.LibraryObject(
+                    R.drawable.img_beijing4
+            ),
     };
 
     private Context mContext;
     private LayoutInflater mLayoutInflater;
 
 
-    public HorizontalPagerAdapter(final Context context) {
+    public HotelPagerAdapter(final Context context) {
         mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
     }

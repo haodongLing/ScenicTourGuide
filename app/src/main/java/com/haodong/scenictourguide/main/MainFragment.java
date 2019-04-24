@@ -30,7 +30,6 @@ public class MainFragment extends MyFragment {
         mViewpager.setAdapter(new HorizontalPagerAdapter(getContext()));
         mRecyclerview = root.findViewById(R.id.main_recycler);
     }
-
     @Override
     protected void initData() {
         super.initData();

@@ -4,11 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/len_72"
         android:background="@color/colorTxtSelected"
         android:paddingTop="@dimen/len_24">
+
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -19,9 +21,9 @@
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
                 android:text="旅行，就是住酒店"
-                android:textStyle="bold"
                 android:textColor="@color/white"
-                android:textSize="@dimen/font_18" />
+                android:textSize="@dimen/font_18"
+                android:textStyle="bold" />
         </FrameLayout>
     </android.support.design.widget.AppBarLayout>
 
@@ -36,45 +38,50 @@
             android:orientation="vertical">
 
             <com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager
-                android:id="@+id/main_viewpager"
+                android:id="@+id/hotel_viewpager"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/len_224"
                 app:icvp_center_page_scale_offset="@dimen/len_16"
                 app:icvp_interpolator="@android:anim/accelerate_decelerate_interpolator"
                 app:icvp_max_page_scale="0.9"
                 app:icvp_medium_scaled="false"
+                app:icvp_min_page_scale="0.75"
                 app:icvp_min_page_scale_offset="5dp"
                 app:icvp_scroll_duration="250" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/len_16"
                 android:paddingRight="@dimen/len_16">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="北京香格里拉酒店"
-                    android:textSize="@dimen/font_18"
-                    android:textColor="@color/black"
+                    android:layout_marginBottom="@dimen/len_2"
                     android:layout_marginTop="@dimen/len_2"
-                    android:layout_marginBottom="@dimen/len_2"/>
+                    android:text="北京香格里拉酒店"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_18" />
+
                 <TextView
                     android:id="@+id/hotel_tv_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="北京"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
+                    android:text="北京"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/font_18"/>
+                    android:textSize="@dimen/font_18" />
+
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                   android:layout_toLeftOf="@+id/hotel_tv_location"
-                    android:src="@drawable/ic_location"
                     android:layout_centerVertical="true"
-                    />
+                    android:layout_toLeftOf="@+id/hotel_tv_location"
+                    android:src="@drawable/ic_location" />
             </RelativeLayout>
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/main_recycler"
                 android:layout_width="match_parent"

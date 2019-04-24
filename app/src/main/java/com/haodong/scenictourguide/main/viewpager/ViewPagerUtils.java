@@ -6,14 +6,12 @@ import android.widget.TextView;
 
 import com.haodong.scenictourguide.R;
 
-/**
- * Created by GIGAMOLE on 8/18/16.
- */
 public class ViewPagerUtils {
 
     public static void setupItem(final View view, final LibraryObject libraryObject) {
         final ImageView img = (ImageView) view.findViewById(R.id.main_vp_img);
         img.setImageResource(libraryObject.getRes());
+        img.setScaleType(ImageView.ScaleType.FIT_XY);
     }
 
     public static class LibraryObject {

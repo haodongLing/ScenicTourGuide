@@ -27,7 +27,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:paddingTop="@dimen/len_24">
+            android:paddingTop="@dimen/len_24"
+            android:paddingLeft="@dimen/len_16"
+            android:paddingRight="@dimen/len_16">
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/et_search_view"
                 android:layout_width="0dp"
