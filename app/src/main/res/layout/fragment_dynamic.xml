@@ -27,9 +27,11 @@
                 android:foreground="?selectableItemBackground"
                 android:src="@drawable/back" />
             <TextView
+                android:id="@+id/dynamic_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="写点评"
+                android:textStyle="bold"
                 android:textSize="@dimen/font_18"
                 android:textColor="@color/colorTxtSelected"
                 android:layout_gravity="center"/>
@@ -83,26 +85,67 @@
         </LinearLayout>
     </FrameLayout>
 
-<FrameLayout
+<LinearLayout
     android:id="@+id/dynamic_layout_edit_text"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/ic_uninstalled_dialog_bg"
+    android:orientation="vertical"
     app:layout_constraintTop_toBottomOf="@+id/dynamic_layout_img"
     >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/dynamic_layout_title"
+        android:visibility="gone"
+        tools:visibility="visible">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="标题"
+            android:textColor="@color/colorTxtSelected"
+            android:layout_marginTop="@dimen/len_16"
+            android:layout_marginLeft="@dimen/len_16"
+            android:textSize="@dimen/font_18"
+            />
+        <EditText
+            android:id="@+id/dynamic_etv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/len_16"
+            android:layout_marginRight="@dimen/len_16"
+            android:layout_marginTop="@dimen/len_8"
+            android:hint="请输入标题"
+            android:textSize="@dimen/sp_16"
+            android:background="@null"
+            android:textColor="@color/text_color"
+            android:textColorHint="@color/text_color"
+            android:paddingBottom="@dimen/len_16"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="内容"
+        android:textColor="@color/colorTxtSelected"
+        android:layout_marginTop="@dimen/len_8"
+        android:layout_marginLeft="@dimen/len_16"
+        android:textSize="@dimen/font_18"
+        />
     <EditText
         android:id="@+id/dynamic_tv_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/len_16"
-
+        android:layout_marginLeft="@dimen/len_16"
+        android:layout_marginRight="@dimen/len_16"
+        android:layout_marginTop="@dimen/len_8"
         android:hint="畅所欲言"
         android:textSize="@dimen/sp_16"
         android:background="@null"
         android:textColor="@color/text_color"
         android:textColorHint="@color/text_color"
         android:paddingBottom="@dimen/len_16"/>
-</FrameLayout>
+</LinearLayout>
 
     <TextView
         android:id="@+id/dynamic_tv_paise"

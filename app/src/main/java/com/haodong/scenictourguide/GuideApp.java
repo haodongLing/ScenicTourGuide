@@ -39,6 +39,7 @@ public class GuideApp extends Application {
         SDKInitializer.initialize(getApplicationContext());
         refWatcher= LeakCanary.install(this);
         TourGuide.setConfiguration(ConfigKeys.CITY,"北京");
+        TourGuide.setConfiguration(ConfigKeys.PROVINCE,"北京市");
     }
     RefWatcher refWatcher;
     public static RefWatcher getRefWatcher(Context context) {

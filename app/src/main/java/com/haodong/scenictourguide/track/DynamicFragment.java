@@ -16,8 +16,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.githang.statusbar.StatusBarTools;
 import com.haodong.scenictourguide.R;
+import com.haodong.scenictourguide.common.app.ConfigKeys;
+import com.haodong.scenictourguide.common.app.TourGuide;
 import com.haodong.scenictourguide.common.app.fragments.PresenterFragment;
 import com.haodong.scenictourguide.track.contractor.DynamicContract;
 import com.haodong.scenictourguide.track.dialog.BottomRemindDialog;
@@ -28,8 +29,11 @@ import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
 import com.zhihu.matisse.engine.impl.MyGlideEngine;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * describe :
@@ -50,6 +54,9 @@ public class DynamicFragment extends PresenterFragment<DynamicContract.Presenter
     private boolean onBackClicked = false;
     private BottomRemindDialog mBottomRemindDialog;
     private SlideImageAdapter mSlideImgAdapter;
+    private String intentFrom;
+    private LinearLayout mLayoutTitle;
+    private TextView tvTitle;
 
     @Override
     public DynamicContract.Presenter initPresenter() {
@@ -62,14 +69,35 @@ public class DynamicFragment extends PresenterFragment<DynamicContract.Presenter
     }
 
     @Override
+    protected void initArgs(Bundle bundle) {
+        super.initArgs(bundle);
+        if (bundle.getString("intentFrom") != null) {
+            intentFrom = bundle.getString("intentFrom");
+        }
+    }
+
+    @Override
     protected void initWidget(View root) {
         super.initWidget(root);
         mImgBack = root.findViewById(R.id.dynamic_back);
+        mImgBack.setOnClickListener(this);
         mTvFabu = root.findViewById(R.id.dynamic_tv_fabu);
         mTvLocation = root.findViewById(R.id.dynamic_location);
+        mTvLocation.setText(TourGuide.getConfiguration(ConfigKeys.PROVINCE));
         mTvDate = root.findViewById(R.id.dynamic_tv_date);
         mLayoutRemind = root.findViewById(R.id.dynamic_layout_remind);
         mRvImg = root.findViewById(R.id.dynamic_rv);
+        mLayoutTitle = root.findViewById(R.id.dynamic_layout_title);
+        tvTitle = root.findViewById(R.id.dynamic_title);
+        /*设置时间*/
+        Calendar calendar= Calendar.getInstance();
+        SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd", Locale.CHINESE);
+        mTvDate.setText(dateFormat.format(calendar.getTime()));
+        if (intentFrom != null && intentFrom.contains("track")) {
+            mLayoutTitle.setVisibility(View.VISIBLE);
+            tvTitle.setText("编辑游记");
+        }
+
         GridLayoutManager manager = new GridLayoutManager(getActivity(), 3);
         mRvImg.setLayoutManager(manager);
         ItemDragHelperCallback callback = new ItemDragHelperCallback() {
@@ -119,6 +147,7 @@ public class DynamicFragment extends PresenterFragment<DynamicContract.Presenter
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.dynamic_back:
+                onDestroy();
                 break;
             case R.id.dynamic_layout_remind:
                 if (checkPermissionWhileJump()) {

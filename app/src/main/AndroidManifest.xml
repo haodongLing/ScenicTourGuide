@@ -51,6 +51,7 @@
             android:name=".location.CitypickerActivity"
             android:theme="@style/DefaultCityPickerTheme" />
         <activity android:name=".location.AttractionsActivity"></activity>
+        <activity android:name=".track.EditTrackActivity"></activity>
     </application>
 
 </manifest>

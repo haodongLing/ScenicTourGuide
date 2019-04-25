@@ -16,4 +16,10 @@ public class UrlToos {
                 .getUrlString();
         return "http://route.showapi.com/268-1?"+url;
     }
+    public static String getHotelUrl(String location){
+        String url = new NormalRequest("http://route.showapi.com/1653-1")
+                .addTextPara("cityName",location)
+                .getUrlString();
+        return "http://route.showapi.com/1653-1?"+url;
+    }
 }

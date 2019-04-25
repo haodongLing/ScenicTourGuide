@@ -80,4 +80,17 @@
                 android:textSize="@dimen/font_18" />
         </FrameLayout>
     </android.support.design.widget.AppBarLayout>
+    <net.qiujuer.genius.ui.widget.FloatActionButton
+        android:id="@+id/track_btn_action"
+        android:layout_width="@dimen/len_52"
+        android:layout_height="@dimen/len_52"
+        android:layout_marginEnd="@dimen/len_16"
+        android:padding="@dimen/len_20"
+        android:src="@drawable/ic_camera2"
+        android:tint="@color/white"
+        app:gBackgroundColor="@color/colorTxtSelected"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="@dimen/len_24"
+        />
 </android.support.constraint.ConstraintLayout>

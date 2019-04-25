@@ -19,6 +19,7 @@ import com.haodong.scenictourguide.common.app.TourGuide;
 import com.haodong.scenictourguide.common.ui.recycler.ItemType;
 import com.haodong.scenictourguide.commonvh.AdViewHolder;
 import com.haodong.scenictourguide.commonvh.LabelViewHolder;
+import com.haodong.scenictourguide.hotel.data.HotelAdapter;
 import com.haodong.scenictourguide.location.AttractionsActivity;
 
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class ScenicListAdapter extends BaseQuickAdapter<ScenicBean.ContentlistBe
     private Context mCOntext;
     private String mLocation;
 
+
     public void setLocation(String mLocation) {
         this.mLocation = mLocation;
     }
@@ -43,7 +45,7 @@ public class ScenicListAdapter extends BaseQuickAdapter<ScenicBean.ContentlistBe
     //设置图片加载策略
     private static final RequestOptions RECYCLER_OPTIONS =
             new RequestOptions()
-                    .error(R.drawable.ic_zanwu)
+                    .error(R.drawable.img_beijing1)
                     .centerCrop()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .dontAnimate();

@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/len_72"
@@ -27,7 +26,7 @@
         </FrameLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <com.haodong.scenictourguide.common.ui.RecyclerScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none">
@@ -82,11 +81,16 @@
                     android:src="@drawable/ic_location" />
             </RelativeLayout>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/main_recycler"
+            <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                android:id="@+id/srl_hotel"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-    </com.haodong.scenictourguide.common.ui.RecyclerScrollView>
+                android:layout_height="match_parent">
 
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_hotel"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

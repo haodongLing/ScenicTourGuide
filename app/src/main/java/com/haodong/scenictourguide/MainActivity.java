@@ -107,12 +107,14 @@ public class MainActivity extends MyActivity implements View.OnClickListener {
            /* String district = location.getDistrict();    //获取区县
             String street = location.getStreet();    //获取街道信息*/
             String province = location.getProvince();    //获取省份
-            String city = location.getCity();    //获取城市
+            String city = location.getCity();
+            String address=location.getAddrStr();
+            //获取城市
             if (isFirstIn) {
                 if (province != null && city != null) {
                     Log.e("tag", "onReceiveLocation: " + city + province);
                     mTvLocation.setText(city);
-                    TourGuide.setConfiguration(ConfigKeys.PROVINCE, province);
+                    TourGuide.setConfiguration(ConfigKeys.PROVINCE, address);
 
                     TourGuide.setConfiguration(ConfigKeys.CITY, city);
                     Log.e(TAG, "onReceiveLocation: " + TourGuide.getConfiguration(ConfigKeys
