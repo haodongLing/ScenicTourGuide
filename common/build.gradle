@@ -80,5 +80,4 @@ dependencies {
     api 'jp.wasabeef:blurry:3.0.0'
     api 'de.hdodenhof:circleimageview:3.0.0'
     api 'com.github.devlight:infinitecycleviewpager:1.0.2'
-
 }

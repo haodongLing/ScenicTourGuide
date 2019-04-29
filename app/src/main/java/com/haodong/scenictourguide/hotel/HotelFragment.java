@@ -8,6 +8,8 @@ import android.view.View;
 
 import com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager;
 import com.haodong.scenictourguide.R;
+import com.haodong.scenictourguide.common.app.ConfigKeys;
+import com.haodong.scenictourguide.common.app.TourGuide;
 import com.haodong.scenictourguide.common.app.fragments.PresenterFragment;
 import com.haodong.scenictourguide.hotel.contract.HotelContract;
 import com.haodong.scenictourguide.hotel.data.HotelAdapter;
@@ -49,7 +51,7 @@ public class HotelFragment extends PresenterFragment<HotelContract.Presenter> im
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
-        mPresenter.loadFirstPage("北京");
+        mPresenter.loadFirstPage(TourGuide.getConfiguration(ConfigKeys.CITY));
     }
 
     @Override
@@ -67,7 +69,7 @@ public class HotelFragment extends PresenterFragment<HotelContract.Presenter> im
             public void onRefresh(RefreshLayout refreshLayout) {
                 isPullToRefresh = true;
                 refreshLayout.finishRefresh(2000);
-                mPresenter.loadFirstPage("北京");
+                mPresenter.loadFirstPage(TourGuide.getConfiguration(ConfigKeys.CITY));
             }
         });
         mRecyclerView = root.findViewById(R.id.rv_hotel);

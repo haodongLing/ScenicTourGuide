@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/item_new_img"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/len_224"
+        android:padding="@dimen/len_2"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_src_tianjin" />
+</android.support.constraint.ConstraintLayout>
