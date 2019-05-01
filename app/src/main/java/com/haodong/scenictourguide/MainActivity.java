@@ -115,7 +115,11 @@ public class MainActivity extends MyActivity implements View.OnClickListener {
                     Log.e("tag", "onReceiveLocation: " + city + province);
                     mTvLocation.setText(city);
                     TourGuide.setConfiguration(ConfigKeys.PROVINCE, address);
-
+                    if (city.endsWith("市")){
+                        String s[]=city.split("市");
+                        city=s[0];
+                        Log.e(TAG, "onReceiveLocation: "+city );
+                    }
                     TourGuide.setConfiguration(ConfigKeys.CITY, city);
                     Log.e(TAG, "onReceiveLocation: " + TourGuide.getConfiguration(ConfigKeys
                             .PROVINCE)
