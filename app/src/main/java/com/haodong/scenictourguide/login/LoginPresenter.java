@@ -2,6 +2,7 @@ package com.haodong.scenictourguide.login;
 
 import android.text.TextUtils;
 
+import com.haodong.scenictourguide.common.app.GuideManager;
 import com.haodong.scenictourguide.common.presenter.BasePresenter;
 
 /**
@@ -20,12 +21,14 @@ public class LoginPresenter extends BasePresenter<LoginContact.View> implements 
     @Override
     public void login(String phone, String password) {
         start();
-        final LoginContact.View view=getView();
+        final LoginContact.View view = getView();
         if (TextUtils.isEmpty(phone) || TextUtils.isEmpty(password)) {
             view.showError("填入的数字不能为空");
         } else {
             // 尝试传递PushId
-           view.loginSuccess();
+            GuideManager.getDefault().onSaveAccount(phone);
+            GuideManager.getDefault().onSavePassword(password);
+            view.loginSuccess();
         }
 
     }

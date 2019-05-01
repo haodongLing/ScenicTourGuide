@@ -38,7 +38,6 @@ public class LauncherActivity extends MyActivity {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         if (firstFragment == null) {
-
             ft.add(R.id.fl_launcher_contain, new LauncherFragment())
                     .commit();
         }

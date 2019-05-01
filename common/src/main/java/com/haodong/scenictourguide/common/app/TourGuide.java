@@ -2,9 +2,12 @@ package com.haodong.scenictourguide.common.app;
 
 import android.app.Application;
 import android.content.Context;
+import android.print.PrinterId;
 import android.support.annotation.StringRes;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.haodong.scenictourguide.common.data.local.GuidePreference;
 
 import java.util.logging.Handler;
 
@@ -40,4 +43,5 @@ public final class TourGuide {
     public static Handler getHandler() {
         return getConfiguration(ConfigKeys.HANDLER);
     }
+
 }

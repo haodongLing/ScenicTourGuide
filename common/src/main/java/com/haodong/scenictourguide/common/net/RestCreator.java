@@ -22,10 +22,10 @@ public class RestCreator {
     private static final class OkHttpHolder {
         private static final int TIME_OUT = 60;
         private static final int CACHE_SIZE = 20 * 1024 * 1024;
-        private static final OkHttpClient OK_HTTP_CLIENT = new OkHttpClient.Builder().connectTimeout
-                (60, TimeUnit.SECONDS)
-                .retryOnConnectionFailure(true)
-                .addNetworkInterceptor(new CacheIntercepter())
+        private static final OkHttpClient OK_HTTP_CLIENT = new OkHttpClient.Builder()
+                .callTimeout(60, TimeUnit.SECONDS)
+//                .retryOnConnectionFailure(true)
+//                .addNetworkInterceptor(new CacheIntercepter())
                 .cache(new Cache(TourGuide.getApplicationContext().getCacheDir(), CACHE_SIZE))
                 .build();
     }

@@ -5,6 +5,7 @@ import android.widget.EditText;
 
 import com.haodong.scenictourguide.MainActivity;
 import com.haodong.scenictourguide.R;
+import com.haodong.scenictourguide.common.app.GuideManager;
 import com.haodong.scenictourguide.common.app.fragments.PresenterFragment;
 
 import net.qiujuer.genius.ui.widget.Button;
@@ -34,6 +35,20 @@ public class LoginFragment extends PresenterFragment<LoginContact.Presenter> imp
         String pwd=mEtvPwd.getText().toString().trim();
         mPresenter.login(phone,pwd);
     }
+
+    @Override
+    protected void initData() {
+        super.initData();
+        String account=GuideManager.getDefault().onReadAccount();
+        String password=GuideManager.getDefault().onReadPassword();
+        if (account!=null&&!account.equals("")){
+            mEtvPhone.setText(account);
+        }
+        if (password!=null&&!account.equals("")){
+            mEtvPwd.setText(password);
+        }
+    }
+
     @Override
     public Object setLayout() {
         return R.layout.fragment_login;

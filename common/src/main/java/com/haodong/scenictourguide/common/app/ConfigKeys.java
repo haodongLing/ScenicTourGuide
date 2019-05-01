@@ -18,5 +18,6 @@ public enum ConfigKeys {
     CITY,
     PROVINCE,
     DISTRICT,
-    APPKEY
+    APPKEY,
+    SHARED_PREFERENCE
 }

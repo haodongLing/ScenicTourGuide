@@ -39,7 +39,6 @@ public final class Configurator {
     static Configurator getInstance() {
         return ConfiguratorHolder.sConfigurator;
     }
-
     public final void configure() {
         Logger.addLogAdapter(new AndroidLogAdapter());
         GUIDE_CONFIGS.put(ConfigKeys.CONFIG_READY, true);

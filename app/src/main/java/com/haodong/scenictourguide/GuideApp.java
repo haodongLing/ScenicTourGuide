@@ -7,7 +7,9 @@ import android.os.Vibrator;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.haodong.scenictourguide.common.app.ConfigKeys;
+import com.haodong.scenictourguide.common.app.GuideManager;
 import com.haodong.scenictourguide.common.app.TourGuide;
+import com.haodong.scenictourguide.common.data.local.GuidePreference;
 import com.haodong.scenictourguide.common.net.QueryCityInfoUtils;
 import com.haodong.scenictourguide.service.LocationService;
 import com.squareup.leakcanary.LeakCanary;
@@ -31,6 +33,7 @@ public class GuideApp extends Application {
                 .withApiHost("http://route.showapi.com/268-1")
                 .withAppKey("7040bc83a04d4de382b61d63a3edda19")
                 .configure();
+        GuideManager.getDefault().init(this);
         /***
          * 初始化定位sdk，
          */
