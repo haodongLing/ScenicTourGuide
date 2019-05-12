@@ -88,7 +88,7 @@
             android:id="@+id/mine_tv_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="北京"
+            android:text="锦州"
             app:layout_constraintLeft_toRightOf="@id/mine_tv_czd"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="@dimen/len_8"

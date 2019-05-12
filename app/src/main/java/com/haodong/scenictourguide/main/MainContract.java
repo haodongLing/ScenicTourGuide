@@ -14,6 +14,6 @@ public interface MainContract {
 
     }
     interface View extends BaseContract.View<MainContract.Presenter>{
-
+        void initAdapter(MainData mainData);
     }
 }

@@ -100,8 +100,8 @@ public class ScenicListAdapter extends BaseQuickAdapter<ScenicBean.ContentlistBe
                 helper.setText(R.id.tv_item_header_location, mLocation);
                 helper.setText(R.id.tv_item_label_label, mLocation + "必体验");
             } else {
-                helper.setText(R.id.tv_item_header_location, "北京");
-                helper.setText(R.id.tv_item_label_label, "北京" + "必体验");
+                helper.setText(R.id.tv_item_header_location, "锦州");
+                helper.setText(R.id.tv_item_label_label, "锦州" + "必体验");
             }
 
             helper.addOnClickListener(R.id.layout_item_header_location);

@@ -25,6 +25,7 @@ public class GuideApp extends Application {
     /*定位相关*/
     public LocationService locationService;
     public Vibrator mVibrator;
+    public static GuideApp instance;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -37,17 +38,23 @@ public class GuideApp extends Application {
         /***
          * 初始化定位sdk，
          */
+        instance=this;
         locationService = new LocationService(getApplicationContext());
         mVibrator =(Vibrator)getApplicationContext().getSystemService(Service.VIBRATOR_SERVICE);
         SDKInitializer.initialize(getApplicationContext());
         refWatcher= LeakCanary.install(this);
-        TourGuide.setConfiguration(ConfigKeys.CITY,"北京");
-        TourGuide.setConfiguration(ConfigKeys.PROVINCE,"北京市");
+        TourGuide.setConfiguration(ConfigKeys.CITY,"锦州");
+        TourGuide.setConfiguration(ConfigKeys.PROVINCE,"锦州");
     }
     RefWatcher refWatcher;
     public static RefWatcher getRefWatcher(Context context) {
         GuideApp application = (GuideApp) context.getApplicationContext();
         return application.refWatcher;
+    }
+    public void mustDie(Object object) {
+        if (refWatcher != null) {
+            refWatcher.watch(object);
+        }
     }
 
 }

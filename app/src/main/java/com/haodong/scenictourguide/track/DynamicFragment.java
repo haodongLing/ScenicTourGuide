@@ -15,11 +15,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.haodong.scenictourguide.R;
 import com.haodong.scenictourguide.common.app.ConfigKeys;
 import com.haodong.scenictourguide.common.app.TourGuide;
 import com.haodong.scenictourguide.common.app.fragments.PresenterFragment;
+import com.haodong.scenictourguide.main.MainData;
+import com.haodong.scenictourguide.main.MainDataManager;
 import com.haodong.scenictourguide.track.contractor.DynamicContract;
 import com.haodong.scenictourguide.track.dialog.BottomRemindDialog;
 import com.haodong.scenictourguide.track.draghelper.ItemDragHelperCallback;
@@ -34,6 +37,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+
+import butterknife.BindView;
 
 /**
  * describe :
@@ -57,6 +62,11 @@ public class DynamicFragment extends PresenterFragment<DynamicContract.Presenter
     private String intentFrom;
     private LinearLayout mLayoutTitle;
     private TextView tvTitle;
+    @BindView(R.id.dynamic_tv_content)
+    TextView tvContent;
+    @BindView(R.id.dynamic_etv_title)
+            EditText etvTitle;
+    List<Uri> uriList=new ArrayList<>();
 
     @Override
     public DynamicContract.Presenter initPresenter() {
@@ -167,6 +177,21 @@ public class DynamicFragment extends PresenterFragment<DynamicContract.Presenter
                 }
                 break;
             case R.id.dynamic_tv_fabu:
+                MainData.MainDataInfo info=new MainData.MainDataInfo();
+                info.setLocation(mTvLocation.getText().toString());
+                info.setDate(mTvDate.getText().toString());
+                info.setTitle(etvTitle.getText().toString());
+//                info.setContent(mTV);
+                info.setPortrait("http://ww1.sinaimg.cn/large/006fCF3Ply1g2jwwi1hkkj303c03c0sm.jpg");
+                List<String>strings=new ArrayList<>();
+                for (int i=0;i<uriList.size();i++){
+                   strings.add(uriList.get(i).toString());
+                }
+                info.setPicUrlList(strings);
+                info.setContent(tvContent.getText().toString());
+                info.setName("呼啦啦");
+                MainDataManager.getDefault().setData(info);
+                Toast.makeText(getActivity(),"上传成功",Toast.LENGTH_SHORT).show();
                 break;
         }
     }
@@ -176,7 +201,7 @@ public class DynamicFragment extends PresenterFragment<DynamicContract.Presenter
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_CHOOSE && resultCode == RESULT_OK) {
             if (data != null) {
-                List<Uri> uriList = Matisse.obtainResult(data);
+                uriList = Matisse.obtainResult(data);
                 List<String> stringList = Matisse.obtainPathResult(data);
                 initAdapter(mPresenter.getSlideArray(uriList, stringList));
             } else {

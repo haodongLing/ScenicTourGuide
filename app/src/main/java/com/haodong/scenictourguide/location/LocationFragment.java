@@ -63,7 +63,7 @@ public class LocationFragment extends PresenterFragment<LocationContact.Presente
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
-        mPresenter.loadFirstPage(1, "北京");
+        mPresenter.loadFirstPage(1, "锦州");
     }
 
     @Override
@@ -80,7 +80,7 @@ public class LocationFragment extends PresenterFragment<LocationContact.Presente
                 isPullToRefresh = true;
                 mTabLayout.setVisibility(View.GONE);
                 refreshLayout.finishRefresh(2000);
-                mPresenter.loadFirstPage(1, "北京");
+                mPresenter.loadFirstPage(1, "锦州");
             }
         });
         mSrlayout.setOnLoadMoreListener(new OnLoadMoreListener() {

@@ -1,6 +1,7 @@
 package com.haodong.scenictourguide.login;
 
 import android.content.Intent;
+import android.util.Log;
 import android.widget.EditText;
 
 import com.haodong.scenictourguide.MainActivity;
@@ -40,6 +41,7 @@ public class LoginFragment extends PresenterFragment<LoginContact.Presenter> imp
     protected void initData() {
         super.initData();
         String account=GuideManager.getDefault().onReadAccount();
+        GuideManager.getDefault().onSaveUserName("呼啦啦");
         String password=GuideManager.getDefault().onReadPassword();
         if (account!=null&&!account.equals("")){
             mEtvPhone.setText(account);

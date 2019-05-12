@@ -20,62 +20,36 @@ import io.reactivex.schedulers.Schedulers;
  * author linghailong
  * email 105354999@qq.com
  */
-public class MainPresenter extends BasePresenter<MainFragment>implements MainContract.Presenter {
-    public static class TestBean{
-        private String name;
-        private String Age;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getAge() {
-            return Age;
-        }
-
-        public void setAge(String age) {
-            Age = age;
-        }
-    }
-
+public class MainPresenter extends BasePresenter<MainContract.View>implements MainContract.Presenter {
+    private MainContract.View mView=null;
     public MainPresenter(MainFragment view) {
         super(view);
+        this.mView=view;
     }
-
     @Override
     public void loadData() {
-        TestBean testBean = new TestBean();
-        testBean.setAge("12");
-        testBean.setName("Tom");
-        String json = JSON.toJSONString(testBean);
-        Log.e("lhl", "loadData: "+json );
         RxRestClient.builder()
-                .url("http://47.93.39.51/test")
-                .raw(json)
+                .url("http://47.93.39.51/scenic")
                 .build()
-                .post()
+                .get()
                 .subscribeOn(Schedulers.io())
-                .map(new Function<String,String>() {
+                .map(new Function<String,MainData>() {
                     @Override
-                    public String apply(String s) throws Exception {
-                        return s;
+                    public MainData apply(String s) throws Exception {
+                        return (MainData) new MainDataConverter().setJsonData(s).convert();
                     }
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<String>() {
+                .subscribe(new Observer<MainData>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(String hotelBean) {
-                        Log.e("lhl", "onNext: "+hotelBean );
+                    public void onNext(MainData mainData) {
+                          getView().initAdapter(mainData);
                     }
 
                     @Override

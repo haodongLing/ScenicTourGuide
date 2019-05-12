@@ -4,62 +4,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <com.haodong.scenictourguide.common.ui.MyVerticalScrollView
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/srl_track"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <RelativeLayout
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="300dp">
-
-            <ImageView
-                android:id="@+id/track_im_header"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="252dp"
-                android:layout_marginBottom="@dimen/len_48"
-                android:contentDescription="@string/app_name"
-                android:scaleType="centerCrop"
-                android:src="@drawable/default_portrait" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/track_im_portrait"
-                android:layout_width="96dp"
-                android:layout_height="96dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="@dimen/len_16"
-                android:src="@drawable/ic_launcher"
-                app:civ_border_color="@color/white"
-                app:civ_border_width="2dp" />
+                    <ImageView
+                        android:id="@+id/track_im_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="252dp"
+                        android:layout_marginBottom="@dimen/len_48"
+                        android:contentDescription="@string/app_name"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/default_portrait" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/track_im_portrait"
-                android:layout_marginBottom="@dimen/len_16"
-                android:layout_marginLeft="@dimen/len_24"
-                android:text="奔腾年代"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/track_im_portrait"
+                        android:layout_width="96dp"
+                        android:layout_height="96dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginStart="@dimen/len_16"
+                        android:src="@drawable/ic_launcher"
+                        app:civ_border_color="@color/white"
+                        app:civ_border_width="2dp" />
 
-            <Button
-                android:layout_width="@dimen/len_156"
-                android:layout_height="@dimen/len_44"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/len_24"
-                android:layout_marginBottom="26dp"
-                android:background="@drawable/bg_btn_daka"
-                android:text="0个足迹"
-                android:textColor="@color/white"
-                android:textSize="@dimen/font_16"
-                 />
-        </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@+id/track_im_portrait"
+                        android:layout_marginBottom="@dimen/len_16"
+                        android:layout_marginLeft="@dimen/len_24"
+                        android:text="奔腾年代"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
 
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
-    </com.haodong.scenictourguide.common.ui.MyVerticalScrollView>
+                    <Button
+                        android:id="@+id/tv_zuji"
+                        android:layout_width="@dimen/len_156"
+                        android:layout_height="@dimen/len_44"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/len_24"
+                        android:layout_marginBottom="26dp"
+                        android:background="@drawable/bg_btn_daka"
+                        android:text="0个足迹"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_16"
+                        />
+                </RelativeLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_track"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

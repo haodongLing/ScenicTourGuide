@@ -47,7 +47,7 @@ public class CitypickerActivity extends MyActivity {
                             public void run() {
                                 //定位完成之后更新数据
                                 CityPicker.from(CitypickerActivity.this).locateComplete(new
-                                        LocatedCity("北京", "北京", "101010100"), LocateState.SUCCESS);
+                                        LocatedCity("锦州", "锦州", "101010100"), LocateState.SUCCESS);
                             }
                         }, 2000);
 

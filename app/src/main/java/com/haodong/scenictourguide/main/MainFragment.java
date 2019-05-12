@@ -28,12 +28,6 @@ public class MainFragment extends PresenterFragment<MainContract.Presenter> impl
     private RecyclerView mRecyclerview;
     @BindView(R.id.main_layout_jipiao)
     LinearLayout mLayoutJipiao;
-
-    @OnClick(R.id.main_layout_jipiao)
-    void onJipiaoClick() {
-        mPresenter.loadData();
-    }
-
     private MainAdapter mainAdapter;
 
     @Override
@@ -47,30 +41,36 @@ public class MainFragment extends PresenterFragment<MainContract.Presenter> impl
         mViewpager = root.findViewById(R.id.main_viewpager);
         mViewpager.setAdapter(new HorizontalPagerAdapter(getContext()));
         mRecyclerview = root.findViewById(R.id.main_recycler);
-        mRecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
+        mRecyclerview.setLayoutManager(linearLayoutManager);
+        linearLayoutManager.canScrollVertically();
+        //解决数据加载不完的问题
+        mRecyclerview.setNestedScrollingEnabled(false);
+        mRecyclerview.setHasFixedSize(true);
+        //解决数据加载完成后, 没有停留在顶部的问题
+        mRecyclerview.setFocusable(false);
 
     }
 
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
-        initData();
+        mPresenter.loadData();
     }
 
-    @Override
-    protected void initData() {
-        super.initData();
-        if (mainAdapter == null) {
-            MainData mainData = new MainDataConverter().convert();
-            mainAdapter = new MainAdapter(R.layout.item_main, mainData.getMainDataInfos());
-            mainAdapter.bindToRecyclerView(mRecyclerview);
-//            mRecyclerview.setAdapter(mainAdapter);
-        }
 
-    }
 
     @Override
     public MainContract.Presenter initPresenter() {
         return new MainPresenter(this);
+    }
+
+    @Override
+    public void initAdapter(MainData mainData) {
+        if (mainAdapter == null) {
+            mainAdapter = new MainAdapter(R.layout.item_main, mainData.getMainDataInfos());
+            mainAdapter.bindToRecyclerView(mRecyclerview);
+//            mRecyclerview.setAdapter(mainAdapter);
+        }
     }
 }

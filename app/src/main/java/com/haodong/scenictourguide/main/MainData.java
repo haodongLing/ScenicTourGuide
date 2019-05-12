@@ -19,7 +19,7 @@ public class MainData {
         this.mainDataInfos = mainDataInfos;
     }
 
-    static class MainDataInfo{
+    public  static class MainDataInfo{
         private String portrait;
         private String name;
         private String location;
@@ -84,5 +84,6 @@ public class MainData {
             this.date = date;
         }
     }
+
 
 }

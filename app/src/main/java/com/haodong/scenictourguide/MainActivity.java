@@ -23,6 +23,7 @@ import com.haodong.scenictourguide.main.MainFragment;
 import com.haodong.scenictourguide.mine.MineFragment;
 import com.haodong.scenictourguide.service.LocationService;
 import com.haodong.scenictourguide.track.TrackFragment;
+import com.squareup.leakcanary.RefWatcher;
 
 import butterknife.BindView;
 import retrofit2.http.PUT;
@@ -93,6 +94,13 @@ public class MainActivity extends MyActivity implements View.OnClickListener {
         locationService.registerListener(mListener);
         locationService.setLocationOption(locationService.getDefaultLocationClientOption());
         locationService.start();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RefWatcher refWatcher=GuideApp.getRefWatcher(this);
+        refWatcher.watch(this);
     }
 
     /*****

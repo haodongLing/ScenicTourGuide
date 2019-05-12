@@ -25,7 +25,10 @@
                 android:textStyle="bold" />
         </FrameLayout>
     </android.support.design.widget.AppBarLayout>
-
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/srl_hotel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -69,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:text="北京"
+                    android:text="锦州"
                     android:textColor="@color/black"
                     android:textSize="@dimen/font_18" />
 
@@ -80,17 +83,12 @@
                     android:layout_toLeftOf="@+id/hotel_tv_location"
                     android:src="@drawable/ic_location" />
             </RelativeLayout>
-
-            <com.scwang.smartrefresh.layout.SmartRefreshLayout
-                android:id="@+id/srl_hotel"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_hotel"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
-            </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>
