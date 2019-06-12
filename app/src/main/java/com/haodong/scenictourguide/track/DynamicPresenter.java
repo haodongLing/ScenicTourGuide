@@ -3,6 +3,7 @@ package com.haodong.scenictourguide.track;
 import android.net.Uri;
 
 import com.haodong.scenictourguide.common.presenter.BasePresenter;
+import com.haodong.scenictourguide.main.MainData;
 import com.haodong.scenictourguide.track.contractor.DynamicContract;
 import com.haodong.scenictourguide.track.recycler.SlideImage;
 
@@ -17,6 +18,7 @@ import java.util.List;
  */
 public class DynamicPresenter extends BasePresenter<DynamicFragment> implements DynamicContract.Presenter {
     DynamicContract.view mView;
+    private UploadRunnable uploadRunnable;
 
     public DynamicPresenter(DynamicFragment view) {
         super(view);
@@ -34,6 +36,17 @@ public class DynamicPresenter extends BasePresenter<DynamicFragment> implements 
             arrayList.add(slideImage);
         }
         return arrayList;
+    }
+
+    @Override
+    public void upLoad(MainData.MainDataInfo mainDataInfo) {
+        uploadRunnable = new UploadRunnable(mainDataInfo, new UploadRunnable.OnUploadFinishListener() {
+            @Override
+            public void onFinish() {
+                getView().hideProgress();
+            }
+        });
+        uploadRunnable.run();
     }
 
 }

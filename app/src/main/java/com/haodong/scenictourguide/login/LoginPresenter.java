@@ -27,9 +27,14 @@ public class LoginPresenter extends BasePresenter<LoginContact.View> implements 
         } else {
             // 尝试传递PushId
             GuideManager.getDefault().onSaveAccount(phone);
-            GuideManager.getDefault().onSavePassword(password);
-            view.loginSuccess();
+            String pwd = GuideManager.getDefault().onReadPassword();
+            if (!pwd.equals("") && password.equals(pwd)) {
+                view.loginSuccess();
+            } else if (pwd.equals("")) {
+                GuideManager.getDefault().onSavePassword(password);
+            } else {
+                view.loginError();
+            }
         }
-
     }
 }

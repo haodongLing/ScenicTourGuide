@@ -11,7 +11,7 @@ import com.haodong.scenictourguide.common.presenter.BaseContract;
  * author linghailong
  * email 105354999@qq.com
  */
-public abstract class PresenterFragment<Presenter extends BaseContract.Presenter> extends MyFragment
+public abstract class   PresenterFragment<Presenter extends BaseContract.Presenter> extends MyFragment
         implements BaseContract.View<Presenter> {
     protected Presenter mPresenter;
 

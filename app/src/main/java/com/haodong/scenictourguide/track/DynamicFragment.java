@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
@@ -28,6 +31,7 @@ import com.haodong.scenictourguide.track.dialog.BottomRemindDialog;
 import com.haodong.scenictourguide.track.draghelper.ItemDragHelperCallback;
 import com.haodong.scenictourguide.track.recycler.SlideImage;
 import com.haodong.scenictourguide.track.recycler.SlideImageAdapter;
+import com.haodong.scenictourguide.view.dialog.ProgressDialog;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
 import com.zhihu.matisse.engine.impl.MyGlideEngine;
@@ -62,11 +66,29 @@ public class DynamicFragment extends PresenterFragment<DynamicContract.Presenter
     private String intentFrom;
     private LinearLayout mLayoutTitle;
     private TextView tvTitle;
+    private ProgressDialog mPregressDislog;
     @BindView(R.id.dynamic_tv_content)
     TextView tvContent;
     @BindView(R.id.dynamic_etv_title)
-            EditText etvTitle;
-    List<Uri> uriList=new ArrayList<>();
+    EditText etvTitle;
+    List<Uri> uriList = new ArrayList<>();
+    private Handler mHandler = new Handler(Looper.getMainLooper()) {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                /*显示dialog*/
+                case 0:
+                    break;
+                /*隐藏dialog*/
+                case 1:
+                    if (mPregressDislog != null) {
+                        mPregressDislog.dismiss();
+                    }
+                    break;
+            }
+        }
+    };
 
     @Override
     public DynamicContract.Presenter initPresenter() {
@@ -100,8 +122,8 @@ public class DynamicFragment extends PresenterFragment<DynamicContract.Presenter
         mLayoutTitle = root.findViewById(R.id.dynamic_layout_title);
         tvTitle = root.findViewById(R.id.dynamic_title);
         /*设置时间*/
-        Calendar calendar= Calendar.getInstance();
-        SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd", Locale.CHINESE);
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINESE);
         mTvDate.setText(dateFormat.format(calendar.getTime()));
         if (intentFrom != null && intentFrom.contains("track")) {
             mLayoutTitle.setVisibility(View.VISIBLE);
@@ -177,21 +199,22 @@ public class DynamicFragment extends PresenterFragment<DynamicContract.Presenter
                 }
                 break;
             case R.id.dynamic_tv_fabu:
-                MainData.MainDataInfo info=new MainData.MainDataInfo();
+                MainData.MainDataInfo info = new MainData.MainDataInfo();
                 info.setLocation(mTvLocation.getText().toString());
                 info.setDate(mTvDate.getText().toString());
                 info.setTitle(etvTitle.getText().toString());
 //                info.setContent(mTV);
                 info.setPortrait("http://ww1.sinaimg.cn/large/006fCF3Ply1g2jwwi1hkkj303c03c0sm.jpg");
-                List<String>strings=new ArrayList<>();
-                for (int i=0;i<uriList.size();i++){
-                   strings.add(uriList.get(i).toString());
+                List<String> strings = new ArrayList<>();
+                for (int i = 0; i < uriList.size(); i++) {
+                    strings.add(uriList.get(i).toString());
                 }
                 info.setPicUrlList(strings);
                 info.setContent(tvContent.getText().toString());
                 info.setName("呼啦啦");
-                MainDataManager.getDefault().setData(info);
-                Toast.makeText(getActivity(),"上传成功",Toast.LENGTH_SHORT).show();
+                showProgress();
+                mPresenter.upLoad(info);
+                Toast.makeText(getActivity(), "上传成功", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
@@ -244,5 +267,26 @@ public class DynamicFragment extends PresenterFragment<DynamicContract.Presenter
     public boolean onBackPressed() {
         onDestroy();
         return true;
+    }
+
+    @Override
+    public void showProgress() {
+        if (mPregressDislog == null) {
+            mPregressDislog = new ProgressDialog(getContext());
+            mPregressDislog.show();
+        } else {
+            mPregressDislog.show();
+        }
+    }
+
+    @Override
+    public void hideProgress() {
+        mHandler.sendEmptyMessage(1);
+    }
+
+    @Override
+    public void onDestroy() {
+        mHandler.removeMessages(1);
+        super.onDestroy();
     }
 }

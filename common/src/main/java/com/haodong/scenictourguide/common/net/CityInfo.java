@@ -38,11 +38,7 @@ public class CityInfo {
     }
 
     public static class ResultBean {
-        /**
-         * cityId : 2
-         * cityName : 安徽
-         * provinceId : 2
-         */
+
 
         private String cityId;
         private String cityName;

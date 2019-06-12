@@ -13,7 +13,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
-public class LocationPresenter extends BasePresenter<LocationFragment> implements
+public class    LocationPresenter extends BasePresenter<LocationFragment> implements
         LocationContact.Presenter {
     private String mLocation;
     private LocationContact.View mView;

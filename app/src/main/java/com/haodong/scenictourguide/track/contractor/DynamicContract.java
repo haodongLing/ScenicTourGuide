@@ -3,6 +3,7 @@ package com.haodong.scenictourguide.track.contractor;
 import android.net.Uri;
 
 import com.haodong.scenictourguide.common.presenter.BaseContract;
+import com.haodong.scenictourguide.main.MainData;
 import com.haodong.scenictourguide.track.recycler.SlideImage;
 
 import java.util.ArrayList;
@@ -17,8 +18,10 @@ import java.util.List;
 public interface DynamicContract {
     interface Presenter extends BaseContract.Presenter{
         ArrayList<SlideImage> getSlideArray(List<Uri> uriList, List<String> pathList);
+        void upLoad(MainData.MainDataInfo mainDataInfo);
     }
     interface  view extends BaseContract.View<DynamicContract.Presenter>{
-
+        void showProgress();
+        void hideProgress();
     }
 }

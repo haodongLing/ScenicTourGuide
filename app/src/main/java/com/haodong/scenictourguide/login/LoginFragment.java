@@ -8,6 +8,7 @@ import com.haodong.scenictourguide.MainActivity;
 import com.haodong.scenictourguide.R;
 import com.haodong.scenictourguide.common.app.GuideManager;
 import com.haodong.scenictourguide.common.app.fragments.PresenterFragment;
+import com.haodong.scenictourguide.view.dialog.ErrorDialog;
 
 import net.qiujuer.genius.ui.widget.Button;
 
@@ -24,6 +25,7 @@ import butterknife.OnClick;
  */
 public class LoginFragment extends PresenterFragment<LoginContact.Presenter> implements
         LoginContact.View {
+    private ErrorDialog errorDialog;
     @BindView(R.id.edit_phone)
     EditText mEtvPhone;
     @BindView(R.id.edit_password)
@@ -61,6 +63,28 @@ public class LoginFragment extends PresenterFragment<LoginContact.Presenter> imp
         startActivity(new Intent(getContext(), MainActivity.class));
         Objects.requireNonNull(getActivity()).finish();
     }
+
+    @Override
+    public void loginError() {
+        if (errorDialog == null) {
+            errorDialog = new ErrorDialog(getActivity(),
+                    new ErrorDialog.OnStateClickedLis() {
+                        @Override
+                        public void onSave() {
+                        }
+
+                        @Override
+                        public void onCancel() {
+                        }
+                    });
+            errorDialog.show();
+        } else if (errorDialog.isShowing()) {
+            errorDialog.dismiss();
+        } else {
+            errorDialog.show();
+        }
+    }
+
     @Override
     public LoginContact.Presenter initPresenter() {
         return new LoginPresenter(this);

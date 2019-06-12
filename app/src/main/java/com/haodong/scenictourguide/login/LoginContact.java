@@ -12,6 +12,7 @@ public interface LoginContact  {
     interface View extends BaseContract.View<Presenter> {
         // 登录成功
         void loginSuccess();
+        void loginError();
     }
 
 
