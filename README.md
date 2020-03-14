@@ -10,7 +10,7 @@
 
 -----------------
 ### 界面欣赏
-界面的话，因为是周末抽时间搞得毕设，比较匆忙，希望大家不要见怪，其次，对于景区地区的[接口地址](https://www.showapi.com/api/lookPoint/268)，使用的网上的收费的，这接口可搞死我了，居然有验证，当时用的时候没有考虑到，差点把我搞吐血了   
+
 
 <img src="http://ww1.sinaimg.cn/large/006fCF3Ply1g4dqqwdwahj30f00qotdd.jpg" width = "200" height = "350" div align=left />
 <img src="http://ww1.sinaimg.cn/large/006fCF3Ply1g4dqv0oabyj30f00qo42i.jpg" width = "200" height = "350" div align=center />
